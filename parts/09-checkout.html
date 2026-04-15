@@ -1,0 +1,335 @@
+<style>
+  /* ── CHECKOUT ── */
+  .checkout-wrap {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 32px;
+    padding: 48px 0 80px;
+    align-items: start;
+  }
+  .checkout-section {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .checkout-section:last-child { margin-bottom: 0; }
+  .checkout-section h3 {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .checkout-section h3 .step-num {
+    width: 24px; height: 24px;
+    background: var(--green-900);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Pincode feedback */
+  .pincode-feedback {
+    font-size: 12.5px;
+    font-weight: 600;
+    margin-top: 6px;
+    display: none;
+  }
+  .pincode-feedback.ok { color: var(--success); display: block; }
+  .pincode-feedback.err { color: var(--error); display: block; }
+
+  /* Payment options */
+  .payment-option {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .payment-option.selected { border-color: var(--green-900); background: var(--green-50); }
+  .payment-option.disabled { opacity: 0.5; cursor: not-allowed; }
+  .payment-radio {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border-2);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.15s;
+  }
+  .payment-option.selected .payment-radio { border-color: var(--green-900); }
+  .payment-radio-inner {
+    width: 9px; height: 9px;
+    background: var(--green-900);
+    border-radius: 50%;
+    display: none;
+  }
+  .payment-option.selected .payment-radio-inner { display: block; }
+  .payment-info { flex: 1; }
+  .payment-info .p-title { font-size: 14px; font-weight: 600; }
+  .payment-info .p-sub { font-size: 12px; color: var(--muted); }
+  .payment-icon { font-size: 26px; }
+
+  /* Min order warning */
+  .min-order-warn {
+    background: #FEF3C7;
+    border: 1.5px solid #FDE68A;
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #78350F;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .min-order-warn.show { display: block; }
+
+  /* Order summary sidebar */
+  .order-summary-sidebar { position: sticky; top: calc(var(--nav-h) + 20px); }
+  .summary-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .summary-card-head {
+    padding: 18px 20px;
+    border-bottom: 1.5px solid var(--border);
+    font-size: 15px;
+    font-weight: 700;
+    background: var(--sand);
+  }
+  .summary-items { padding: 16px 20px; border-bottom: 1.5px solid var(--border); max-height: 260px; overflow-y: auto; }
+  .summary-item { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .summary-item:last-child { margin-bottom: 0; }
+  .summary-item-emoji { font-size: 26px; width: 40px; height: 40px; background: var(--green-50); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .summary-item-info { flex: 1; min-width: 0; }
+  .summary-item-name { font-size: 13px; font-weight: 600; line-height: 1.3; }
+  .summary-item-qty { font-size: 12px; color: var(--muted); }
+  .summary-item-price { font-size: 13px; font-weight: 700; color: var(--green-900); white-space: nowrap; }
+  .summary-totals { padding: 16px 20px; }
+  .summary-row { display: flex; justify-content: space-between; font-size: 13.5px; color: var(--muted); margin-bottom: 8px; }
+  .summary-row.grand { font-size: 16px; font-weight: 700; color: var(--text); padding-top: 10px; margin-top: 4px; border-top: 1.5px solid var(--border); }
+  .summary-row.grand span:last-child { color: var(--green-900); }
+
+  @media (max-width: 800px) {
+    .checkout-wrap { grid-template-columns: 1fr; }
+    .order-summary-sidebar { position: static; }
+  }
+
+  /* ── ORDER SUCCESS ── */
+  .success-page {
+    min-height: calc(100vh - var(--bar-h) - var(--nav-h) - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+  }
+  .success-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    max-width: 540px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+  }
+  .success-circle {
+    width: 80px; height: 80px;
+    background: var(--green-50);
+    border: 2px solid var(--green-100);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 38px;
+    margin: 0 auto 24px;
+  }
+  .success-card h2 { font-size: 30px; margin-bottom: 10px; }
+  .success-card .sub { font-size: 15px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+  .order-num-badge {
+    display: inline-block;
+    background: var(--green-50);
+    border: 1.5px solid var(--green-100);
+    border-radius: var(--radius);
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--green-900);
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+  }
+  .next-steps { text-align: left; margin-bottom: 28px; }
+  .next-steps h4 { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; font-family: 'Inter', sans-serif; }
+  .next-step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+  .step-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--green-50); border: 2px solid var(--green-100); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--green-900); flex-shrink: 0; margin-top: 1px; }
+  .step-info .step-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .step-info .step-desc { font-size: 12.5px; color: var(--muted); }
+  .success-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 480px) {
+    .success-card { padding: 32px 20px; }
+  }
+</style>
+
+<!-- CHECKOUT PAGE -->
+<div class="page" id="page-checkout">
+  <div class="container">
+    <div class="checkout-wrap">
+      <div class="checkout-left">
+
+        <!-- Address -->
+        <div class="checkout-section">
+          <h3><span class="step-num">1</span> Delivery Address</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" id="co-name" placeholder="Your full name">
+            </div>
+            <div class="form-group">
+              <label>Phone *</label>
+              <input type="tel" id="co-phone" placeholder="+91 XXXXX XXXXX">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Address Line *</label>
+            <input type="text" id="co-address" placeholder="House / Flat no, Street, Colony">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Area *</label>
+              <select id="co-area">
+                <option value="">Select area</option>
+                <option>Banjara Hills</option>
+                <option>Jubilee Hills</option>
+                <option>Hitech City</option>
+                <option>Gachibowli</option>
+                <option>Kondapur</option>
+                <option>Madhapur</option>
+                <option>Kukatpally</option>
+                <option>Begumpet</option>
+                <option>Secunderabad</option>
+                <option>Ameerpet</option>
+                <option>Dilsukhnagar</option>
+                <option>LB Nagar</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Pincode *</label>
+              <input type="text" id="co-pincode" placeholder="500034" maxlength="6" oninput="validatePincode(this.value)">
+              <div class="pincode-feedback" id="pincode-feedback"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Landmark <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+            <input type="text" id="co-landmark" placeholder="Near a landmark...">
+          </div>
+        </div>
+
+        <!-- Payment -->
+        <div class="checkout-section">
+          <h3><span class="step-num">2</span> Payment Method</h3>
+          <div class="payment-option selected" id="pay-cod">
+            <span class="payment-icon">💵</span>
+            <div class="payment-info">
+              <div class="p-title">Cash on Delivery</div>
+              <div class="p-sub">Pay when your order arrives. No extra charges.</div>
+            </div>
+            <div class="payment-radio"><div class="payment-radio-inner"></div></div>
+          </div>
+          <div class="payment-option disabled">
+            <span class="payment-icon">💳</span>
+            <div class="payment-info">
+              <div class="p-title">Razorpay <span class="badge badge-processing" style="font-size:10px;margin-left:6px">Coming Soon</span></div>
+              <div class="p-sub">UPI, Cards, Net Banking — available soon.</div>
+            </div>
+            <div class="payment-radio"></div>
+          </div>
+        </div>
+
+        <!-- Place order -->
+        <div class="min-order-warn" id="checkout-min-warn">
+          ⚠️ Min. order value is ₹1,999 to place an order. Add more items or <a href="#" onclick="showPage('shop')">browse the shop</a>.
+        </div>
+        <button class="btn btn-primary btn-full btn-lg" id="place-order-btn" onclick="placeOrder()">
+          Place Order — Cash on Delivery →
+        </button>
+        <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:10px">
+          By placing the order you agree to our <a href="#" style="color:var(--green-900);font-weight:600">Terms & Conditions</a>
+        </p>
+      </div>
+
+      <!-- Sticky order summary -->
+      <div class="order-summary-sidebar">
+        <div class="summary-card">
+          <div class="summary-card-head">Order Summary</div>
+          <div class="summary-items" id="checkout-items"></div>
+          <div class="summary-totals">
+            <div class="summary-row"><span>Subtotal</span><span id="co-subtotal">₹0</span></div>
+            <div class="summary-row"><span>Delivery</span><span id="co-delivery">Free</span></div>
+            <div class="summary-row grand"><span>Total</span><span id="co-total">₹0</span></div>
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-sm" style="margin-top:12px;width:100%" onclick="toggleCart()">← Edit Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER SUCCESS PAGE -->
+<div class="page" id="page-success">
+  <div class="container">
+    <div class="success-page">
+      <div class="success-card">
+        <div class="success-circle">✅</div>
+        <h2>Order Placed!</h2>
+        <p class="sub">Thank you! We've received your order and will call to confirm shortly.</p>
+        <div class="order-num-badge" id="success-order-num">SNL-2026-00001</div>
+        <div class="next-steps">
+          <h4>What happens next</h4>
+          <div class="next-step">
+            <div class="step-dot">1</div>
+            <div class="step-info">
+              <div class="step-title">We'll call to confirm</div>
+              <div class="step-desc">Our team will call you within a few hours to confirm your order.</div>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="step-dot">2</div>
+            <div class="step-info">
+              <div class="step-title">Order packed</div>
+              <div class="step-desc">Plants are carefully packed at our nursery with care instructions.</div>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="step-dot">3</div>
+            <div class="step-info">
+              <div class="step-title">Out for delivery</div>
+              <div class="step-desc">Your order is dispatched across Hyderabad. Same-day for orders before 12 PM.</div>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="step-dot">4</div>
+            <div class="step-info">
+              <div class="step-title">Delivered — Pay on arrival</div>
+              <div class="step-desc">Pay cash when your plants arrive. Inspect before paying.</div>
+            </div>
+          </div>
+        </div>
+        <div class="success-actions">
+          <button class="btn btn-primary" onclick="showPage('shop')">Continue Shopping</button>
+          <a class="btn btn-outline" href="https://wa.me/919876543210" target="_blank">Track on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

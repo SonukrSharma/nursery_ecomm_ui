@@ -1,0 +1,681 @@
+<script>
+/* ═══════════════════════════════════════════════
+   APP STATE
+═══════════════════════════════════════════════ */
+const PRODUCTS = [
+  { id:1,  name:'Peace Lily',       cat:'Indoor',      price:350, original:null, stock:0,  isBest:true,  isNew:false, emoji:'🪷', tags:['Low light','Once/week'] },
+  { id:2,  name:'Lucky Bamboo',     cat:'Lucky Plants',price:199, original:249,  stock:24, isBest:true,  isNew:false, emoji:'🎋', tags:['Bright indirect','Water daily'] },
+  { id:3,  name:'Snake Plant',      cat:'Indoor',      price:450, original:null, stock:18, isBest:true,  isNew:false, emoji:'🌿', tags:['Low light','Once/2 weeks'] },
+  { id:4,  name:'Aglaonema',        cat:'Indoor',      price:380, original:450,  stock:15, isBest:false, isNew:true,  emoji:'🍃', tags:['Shade ok','Once/week'] },
+  { id:5,  name:'Areca Palm',       cat:'Indoor',      price:899, original:null, stock:7,  isBest:true,  isNew:false, emoji:'🌴', tags:['Bright light','3×/week'] },
+  { id:6,  name:'Mini Palm',        cat:'Balcony',     price:320, original:null, stock:12, isBest:false, isNew:true,  emoji:'🌱', tags:['Full sun','2×/week'] },
+  { id:7,  name:'Lemongrass',       cat:'Balcony',     price:120, original:null, stock:30, isBest:false, isNew:true,  emoji:'🌾', tags:['Full sun','Daily'] },
+  { id:8,  name:'Jade Plant',       cat:'Lucky Plants',price:280, original:320,  stock:20, isBest:false, isNew:false, emoji:'💚', tags:['Bright light','2×/week'] },
+  { id:9,  name:'Kadalka',          cat:'Outdoor',     price:150, original:null, stock:25, isBest:false, isNew:true,  emoji:'🌺', tags:['Full sun','Daily'] },
+  { id:10, name:'Ceramic Blue Pot', cat:'Planters',    price:650, original:null, stock:12, isBest:false, isNew:false, emoji:'🏺', tags:['Ceramic','Medium size'] },
+  { id:11, name:'Potting Mix 2kg',  cat:'Plant Care',  price:180, original:null, stock:50, isBest:false, isNew:false, emoji:'🌰', tags:['2kg bag','All plants'] },
+  { id:12, name:'NPK Fertilizer',   cat:'Plant Care',  price:220, original:280,  stock:35, isBest:false, isNew:true,  emoji:'🧪', tags:['All purpose','Monthly'] },
+];
+
+const MOCK_USERS = [
+  { username:'admin',    password:'admin123', name:'Admin',    role:'ADMIN' },
+  { username:'customer', password:'cust123',  name:'Priya',    role:'CUSTOMER' },
+];
+
+const MOCK_ORDERS = [
+  { id:'SNL-2026-00005', customer:'Arun K.',  date:'14 Apr 2026', items:[{p:PRODUCTS[4],qty:1},{p:PRODUCTS[2],qty:1}],   total:2340, status:'Pending' },
+  { id:'SNL-2026-00004', customer:'Meena S.', date:'13 Apr 2026', items:[{p:PRODUCTS[1],qty:2},{p:PRODUCTS[7],qty:1}],   total:3150, status:'Processing' },
+  { id:'SNL-2026-00003', customer:'Priya R.', date:'12 Apr 2026', items:[{p:PRODUCTS[2],qty:1},{p:PRODUCTS[4],qty:1}],   total:1999, status:'Processing' },
+  { id:'SNL-2026-00002', customer:'Rajesh M.',date:'8 Apr 2026',  items:[{p:PRODUCTS[0],qty:2},{p:PRODUCTS[10],qty:2}],  total:4200, status:'Delivered' },
+  { id:'SNL-2026-00001', customer:'Priya R.', date:'3 Apr 2026',  items:[{p:PRODUCTS[1],qty:3},{p:PRODUCTS[10],qty:2}],  total:1557, status:'Delivered' },
+];
+
+let cart = [];
+let currentUser = null;
+let currentPage = 'home';
+let shopFilter = 'All';
+let shopSort = 'featured';
+let modalProductId = null;
+let modalQty = 1;
+let orderCounter = 5;
+
+/* ═══════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  loadCart();
+  renderCarousels();
+  renderShopGrid();
+  renderAdminProducts();
+  renderAdminOrders();
+  initCarouselDrag('best-sellers-track');
+  initCarouselDrag('new-arrivals-track');
+});
+
+/* ═══════════════════════════════════════════════
+   PAGE ROUTING
+═══════════════════════════════════════════════ */
+function showPage(id) {
+  // Guard: admin requires login
+  if (id === 'admin') {
+    if (!currentUser || currentUser.role !== 'ADMIN') { showPage('login'); return; }
+  }
+  // Guard: orders requires login
+  if (id === 'orders') {
+    if (!currentUser) { showPage('login'); return; }
+  }
+
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + id);
+  if (target) {
+    target.classList.add('active');
+    currentPage = id;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Update nav active state
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  const activeLink = document.querySelector(`.nav-link[onclick*="'${id}'"]`);
+  if (activeLink) activeLink.classList.add('active');
+
+  // Populate checkout on navigate
+  if (id === 'checkout') renderCheckoutSummary();
+}
+
+/* ═══════════════════════════════════════════════
+   CART
+═══════════════════════════════════════════════ */
+function addToCart(productId, qty = 1) {
+  const p = PRODUCTS.find(x => x.id === productId);
+  if (!p || p.stock === 0) return;
+  const existing = cart.find(x => x.id === productId);
+  if (existing) {
+    existing.qty = Math.min(existing.qty + qty, p.stock);
+  } else {
+    cart.push({ id: productId, qty });
+  }
+  saveCart();
+  renderCartSidebar();
+  showToast(p);
+}
+
+function removeFromCart(productId) {
+  cart = cart.filter(x => x.id !== productId);
+  saveCart();
+  renderCartSidebar();
+}
+
+function updateQty(productId, delta) {
+  const item = cart.find(x => x.id === productId);
+  if (!item) return;
+  item.qty = Math.max(1, item.qty + delta);
+  const p = PRODUCTS.find(x => x.id === productId);
+  if (p) item.qty = Math.min(item.qty, p.stock);
+  saveCart();
+  renderCartSidebar();
+}
+
+function getCartTotal() {
+  return cart.reduce((sum, item) => {
+    const p = PRODUCTS.find(x => x.id === item.id);
+    return p ? sum + (p.price * item.qty) : sum;
+  }, 0);
+}
+
+function getDelivery(total) { return total >= 500 ? 0 : 50; }
+
+function renderCartSidebar() {
+  const itemsEl = document.getElementById('cart-items');
+  const footerEl = document.getElementById('cart-footer');
+  const badgeEl = document.getElementById('cart-badge');
+  const countLabel = document.getElementById('cart-count-label');
+  const total = getCartTotal();
+  const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+
+  // Badge
+  if (totalQty > 0) {
+    badgeEl.textContent = totalQty;
+    badgeEl.classList.add('show');
+  } else {
+    badgeEl.classList.remove('show');
+  }
+  countLabel.textContent = totalQty > 0 ? `${totalQty} item${totalQty>1?'s':''}` : '';
+
+  if (cart.length === 0) {
+    itemsEl.innerHTML = `<div class="cart-empty"><div class="e-icon">🌱</div><p>Your cart is empty</p><button class="btn btn-outline btn-sm" onclick="toggleCart();showPage('shop')">Browse Plants</button></div>`;
+    footerEl.style.display = 'none';
+    document.getElementById('cart-progress-wrap').style.display = 'none';
+    return;
+  }
+
+  // Items
+  itemsEl.innerHTML = cart.map(item => {
+    const p = PRODUCTS.find(x => x.id === item.id);
+    if (!p) return '';
+    return `<div class="cart-item">
+      <div class="cart-item-emoji">${p.emoji}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${p.name}</div>
+        <div class="cart-item-cat">${p.cat}</div>
+        <div class="cart-item-row">
+          <div class="qty-stepper">
+            <button class="qty-btn" onclick="updateQty(${p.id},-1)">−</button>
+            <span class="qty-val">${item.qty}</span>
+            <button class="qty-btn" onclick="updateQty(${p.id},1)">+</button>
+          </div>
+          <span class="cart-item-price">₹${(p.price * item.qty).toLocaleString('en-IN')}</span>
+        </div>
+      </div>
+      <button class="cart-remove" onclick="removeFromCart(${p.id})" aria-label="Remove">✕</button>
+    </div>`;
+  }).join('');
+
+  // Progress bar toward ₹1,999 min order
+  const MIN_ORDER = 1999;
+  const pct = Math.min((total / MIN_ORDER) * 100, 100);
+  document.getElementById('cart-progress-wrap').style.display = 'block';
+  document.getElementById('cart-progress-fill').style.width = pct + '%';
+  const need = Math.max(MIN_ORDER - total, 0);
+  const labelEl = document.getElementById('cart-progress-label');
+  if (total >= MIN_ORDER) {
+    labelEl.innerHTML = `✓ Min. order met! <span>Free delivery applied</span>`;
+  } else {
+    labelEl.innerHTML = `Add <span>₹${need.toLocaleString('en-IN')}</span> more to place order`;
+  }
+
+  // Summary
+  const delivery = getDelivery(total);
+  document.getElementById('cart-subtotal').textContent = '₹' + total.toLocaleString('en-IN');
+  document.getElementById('cart-delivery').textContent = delivery === 0 ? 'Free' : '₹' + delivery;
+  document.getElementById('cart-total').textContent = '₹' + (total + delivery).toLocaleString('en-IN');
+
+  // Min order warn + button state
+  const minWarn = document.getElementById('cart-min-warn');
+  const checkoutBtn = document.getElementById('cart-checkout-btn');
+  if (total < MIN_ORDER) {
+    minWarn.classList.add('show');
+    checkoutBtn.disabled = true;
+    checkoutBtn.textContent = `Add ₹${(MIN_ORDER - total).toLocaleString('en-IN')} more`;
+  } else {
+    minWarn.classList.remove('show');
+    checkoutBtn.disabled = false;
+    checkoutBtn.textContent = 'Proceed to Checkout →';
+  }
+
+  footerEl.style.display = 'block';
+}
+
+function toggleCart() {
+  const overlay = document.getElementById('cart-overlay');
+  const sidebar = document.getElementById('cart-sidebar');
+  overlay.classList.toggle('open');
+  sidebar.classList.toggle('open');
+  if (sidebar.classList.contains('open')) renderCartSidebar();
+}
+
+function goToCheckout() {
+  if (!currentUser) { toggleCart(); showPage('login'); return; }
+  toggleCart();
+  showPage('checkout');
+}
+
+function saveCart() {
+  localStorage.setItem('snl_cart', JSON.stringify(cart));
+}
+function loadCart() {
+  try {
+    const saved = localStorage.getItem('snl_cart');
+    if (saved) cart = JSON.parse(saved);
+  } catch(e) { cart = []; }
+  renderCartSidebar();
+}
+
+/* ═══════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════ */
+function showToast(product) {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `
+    <div class="toast-emoji">${product.emoji}</div>
+    <div class="toast-body">
+      <div class="toast-title">${product.name} added to cart ✓</div>
+      <div class="toast-sub">${product.cat} · ₹${product.price}</div>
+      <span class="toast-link" onclick="toggleCart()">View Cart →</span>
+    </div>
+    <button class="toast-close" onclick="removeToast(this.parentElement)">✕</button>`;
+  container.appendChild(toast);
+  setTimeout(() => removeToast(toast), 3500);
+}
+function removeToast(el) {
+  if (!el) return;
+  el.classList.add('out');
+  setTimeout(() => el.remove(), 280);
+}
+
+/* ═══════════════════════════════════════════════
+   PRODUCT CARDS (reusable renderer)
+═══════════════════════════════════════════════ */
+function buildProductCard(p) {
+  const outOfStock = p.stock === 0;
+  const badges = [
+    p.isBest ? `<span class="badge badge-best">Best Seller</span>` : '',
+    p.isNew  ? `<span class="badge badge-new">New</span>` : '',
+    outOfStock ? `<span class="badge badge-out">Out of Stock</span>` : '',
+  ].filter(Boolean).join('');
+  const tags = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+  return `
+    <div class="product-card ${outOfStock ? 'out-of-stock' : ''}">
+      <div class="product-img">
+        <div class="badges">${badges}</div>
+        ${p.emoji}
+      </div>
+      <div class="product-body">
+        <div class="product-cat">${p.cat}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-tags">${tags}</div>
+        <div class="product-price">
+          <span class="price">₹${p.price}</span>
+          ${p.original ? `<span class="original">₹${p.original}</span>` : ''}
+        </div>
+        <div class="product-actions">
+          <button class="btn btn-outline" onclick="openModal(${p.id})">Details</button>
+          <button class="btn btn-primary" onclick="addToCart(${p.id})" ${outOfStock ? 'disabled' : ''}>
+            ${outOfStock ? 'Out of Stock' : '+ Cart'}
+          </button>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════
+   CAROUSELS
+═══════════════════════════════════════════════ */
+function renderCarousels() {
+  const bestEl = document.getElementById('best-sellers-track');
+  const newEl = document.getElementById('new-arrivals-track');
+  if (bestEl) bestEl.innerHTML = PRODUCTS.filter(p => p.isBest).map(buildProductCard).join('');
+  if (newEl)  newEl.innerHTML  = PRODUCTS.filter(p => p.isNew).map(buildProductCard).join('');
+}
+
+function scrollCarousel(trackId, direction) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+  const cardWidth = track.querySelector('.product-card')?.offsetWidth || 240;
+  track.scrollBy({ left: direction * (cardWidth + 18), behavior: 'smooth' });
+}
+
+function initCarouselDrag(trackId) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+  let isDown = false, startX, scrollLeft;
+  track.addEventListener('mousedown', e => { isDown = true; track.classList.add('dragging'); startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
+  track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('dragging'); });
+  track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
+  track.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; track.scrollLeft = scrollLeft - (x - startX); });
+}
+
+/* ═══════════════════════════════════════════════
+   SHOP
+═══════════════════════════════════════════════ */
+function setShopFilter(cat, btn) {
+  shopFilter = cat;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderShopGrid();
+}
+
+function filterShop(cat) {
+  showPage('shop');
+  setTimeout(() => setShopFilter(cat, document.querySelector(`.filter-pill[onclick*="'${cat}'"]`)), 50);
+}
+
+function applyShopFilters() {
+  shopSort = document.getElementById('shop-sort')?.value || 'featured';
+  renderShopGrid();
+}
+
+function renderShopGrid() {
+  const grid = document.getElementById('shop-grid');
+  if (!grid) return;
+  let filtered = shopFilter === 'All' ? [...PRODUCTS] : PRODUCTS.filter(p => p.cat === shopFilter);
+
+  if (shopSort === 'price-asc')  filtered.sort((a,b) => a.price - b.price);
+  if (shopSort === 'price-desc') filtered.sort((a,b) => b.price - a.price);
+  if (shopSort === 'new')        filtered = filtered.filter(p => p.isNew).concat(filtered.filter(p => !p.isNew));
+
+  const countEl = document.getElementById('shop-count');
+  if (countEl) countEl.textContent = `Showing ${filtered.length} product${filtered.length !== 1 ? 's' : ''}`;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="no-results"><div class="icon">🔍</div><p>No products found in this category.</p><button class="btn btn-outline btn-sm" onclick="setShopFilter('All',document.querySelector('.filter-pill'))">Show All</button></div>`;
+    return;
+  }
+  grid.innerHTML = filtered.map(buildProductCard).join('');
+}
+
+/* ═══════════════════════════════════════════════
+   PRODUCT MODAL
+═══════════════════════════════════════════════ */
+function openModal(productId) {
+  const p = PRODUCTS.find(x => x.id === productId);
+  if (!p) return;
+  modalProductId = productId;
+  modalQty = 1;
+  document.getElementById('modal-img').textContent = p.emoji;
+  document.getElementById('modal-cat').textContent = p.cat.toUpperCase();
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-price').textContent = '₹' + p.price;
+  const orig = document.getElementById('modal-original');
+  orig.textContent = p.original ? '₹' + p.original : '';
+  document.getElementById('modal-tags').innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+  document.getElementById('modal-qty').textContent = 1;
+  document.getElementById('modal-stock').textContent = p.stock === 0 ? '⚠ Out of stock' : `${p.stock} in stock`;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal-overlay')) return;
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  modalProductId = null;
+}
+
+function modalQtyChange(delta) {
+  const p = PRODUCTS.find(x => x.id === modalProductId);
+  if (!p) return;
+  modalQty = Math.max(1, Math.min(modalQty + delta, p.stock || 1));
+  document.getElementById('modal-qty').textContent = modalQty;
+}
+
+function modalAddToCart() {
+  if (modalProductId) { addToCart(modalProductId, modalQty); document.getElementById('modal-overlay').classList.remove('open'); document.body.style.overflow = ''; }
+}
+
+function modalBuyNow() {
+  if (modalProductId) { addToCart(modalProductId, modalQty); document.getElementById('modal-overlay').classList.remove('open'); document.body.style.overflow = ''; goToCheckout(); }
+}
+
+/* ═══════════════════════════════════════════════
+   AUTH
+═══════════════════════════════════════════════ */
+function switchAuthTab(tab, btn) {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.getElementById('auth-' + tab + '-form').classList.add('active');
+}
+
+function doLogin() {
+  const u = document.getElementById('login-username').value.trim();
+  const p = document.getElementById('login-password').value;
+  const err = document.getElementById('login-error');
+  const found = MOCK_USERS.find(x => x.username === u && x.password === p);
+  if (!found) { err.classList.add('show'); return; }
+  err.classList.remove('show');
+  loginUser(found);
+}
+
+function doRegister() {
+  const name = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const pass = document.getElementById('reg-password').value;
+  const confirm = document.getElementById('reg-confirm').value;
+  const err = document.getElementById('register-error');
+  if (!name || !email || !pass) { err.textContent = 'Please fill all required fields.'; err.classList.add('show'); return; }
+  if (pass.length < 6) { err.textContent = 'Password must be at least 6 characters.'; err.classList.add('show'); return; }
+  if (pass !== confirm) { err.textContent = 'Passwords do not match.'; err.classList.add('show'); return; }
+  err.classList.remove('show');
+  const newUser = { username: email, password: pass, name, role: 'CUSTOMER' };
+  MOCK_USERS.push(newUser);
+  loginUser(newUser);
+}
+
+function loginUser(user) {
+  currentUser = user;
+  const btn = document.getElementById('nav-user-btn');
+  btn.textContent = `Hi, ${user.name} ▾`;
+  btn.classList.add('logged-in');
+  if (user.role === 'ADMIN') {
+    document.getElementById('admin-nav-link').style.display = '';
+    document.getElementById('admin-nav-link-mobile').style.display = '';
+    document.getElementById('admin-sidebar-name').textContent = user.name;
+    showPage('admin');
+  } else {
+    showPage('home');
+  }
+}
+
+function handleUserBtnClick() {
+  if (currentUser) {
+    // logout dropdown — simple toggle for prototype
+    if (confirm(`Logged in as ${currentUser.name}. Log out?`)) logoutUser();
+  } else {
+    showPage('login');
+  }
+}
+
+function logoutUser() {
+  currentUser = null;
+  cart = [];
+  saveCart();
+  renderCartSidebar();
+  const btn = document.getElementById('nav-user-btn');
+  btn.textContent = 'Login';
+  btn.classList.remove('logged-in');
+  document.getElementById('admin-nav-link').style.display = 'none';
+  document.getElementById('admin-nav-link-mobile').style.display = 'none';
+  showPage('home');
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE NAV
+═══════════════════════════════════════════════ */
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+/* ═══════════════════════════════════════════════
+   INQUIRY FORMS
+═══════════════════════════════════════════════ */
+function submitInquiry(e, type) {
+  e.preventDefault();
+  const wrap = document.getElementById(type + '-form-wrap');
+  const success = document.getElementById(type + '-success');
+  if (wrap) wrap.style.display = 'none';
+  if (success) success.classList.add('show');
+}
+
+/* ═══════════════════════════════════════════════
+   CHECKOUT
+═══════════════════════════════════════════════ */
+function validatePincode(val) {
+  const feedback = document.getElementById('pincode-feedback');
+  if (!feedback) return;
+  const num = parseInt(val);
+  if (val.length < 6) { feedback.className = 'pincode-feedback'; return; }
+  if (num >= 500001 && num <= 500098) {
+    feedback.textContent = '✓ Delivering to Hyderabad';
+    feedback.className = 'pincode-feedback ok';
+  } else {
+    feedback.textContent = '✗ Outside delivery zone. Call us: +91 98765 43210';
+    feedback.className = 'pincode-feedback err';
+  }
+}
+
+function renderCheckoutSummary() {
+  const itemsEl = document.getElementById('checkout-items');
+  if (!itemsEl) return;
+  itemsEl.innerHTML = cart.map(item => {
+    const p = PRODUCTS.find(x => x.id === item.id);
+    if (!p) return '';
+    return `<div class="summary-item">
+      <div class="summary-item-emoji">${p.emoji}</div>
+      <div class="summary-item-info">
+        <div class="summary-item-name">${p.name}</div>
+        <div class="summary-item-qty">× ${item.qty}</div>
+      </div>
+      <div class="summary-item-price">₹${(p.price * item.qty).toLocaleString('en-IN')}</div>
+    </div>`;
+  }).join('');
+
+  const total = getCartTotal();
+  const delivery = getDelivery(total);
+  document.getElementById('co-subtotal').textContent = '₹' + total.toLocaleString('en-IN');
+  document.getElementById('co-delivery').textContent = delivery === 0 ? 'Free' : '₹' + delivery;
+  document.getElementById('co-total').textContent = '₹' + (total + delivery).toLocaleString('en-IN');
+
+  const minWarn = document.getElementById('checkout-min-warn');
+  const placeBtn = document.getElementById('place-order-btn');
+  if (total < 1999) {
+    minWarn.classList.add('show');
+    placeBtn.disabled = true;
+  } else {
+    minWarn.classList.remove('show');
+    placeBtn.disabled = false;
+  }
+}
+
+function placeOrder() {
+  const name = document.getElementById('co-name')?.value.trim();
+  const phone = document.getElementById('co-phone')?.value.trim();
+  const address = document.getElementById('co-address')?.value.trim();
+  const area = document.getElementById('co-area')?.value;
+  const pincode = document.getElementById('co-pincode')?.value.trim();
+  if (!name || !phone || !address || !area || !pincode) { alert('Please fill all required delivery details.'); return; }
+  const pin = parseInt(pincode);
+  if (pin < 500001 || pin > 500098) { alert('Please enter a valid Hyderabad pincode (500001–500098).'); return; }
+
+  orderCounter++;
+  const orderNum = `SNL-2026-${String(orderCounter).padStart(5,'0')}`;
+  document.getElementById('success-order-num').textContent = orderNum;
+  cart = [];
+  saveCart();
+  renderCartSidebar();
+  showPage('success');
+}
+
+/* ═══════════════════════════════════════════════
+   ADMIN
+═══════════════════════════════════════════════ */
+function switchAdminTab(tab, btn) {
+  document.querySelectorAll('.admin-tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.admin-nav-item').forEach(i => i.classList.remove('active'));
+  document.getElementById('admin-tab-' + tab)?.classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function renderAdminProducts() {
+  const tbody = document.getElementById('admin-products-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = PRODUCTS.map(p => `
+    <tr>
+      <td><span style="font-size:20px">${p.emoji}</span> <strong>${p.name}</strong></td>
+      <td>${p.cat}</td>
+      <td>₹${p.price}${p.original ? `<br><span style="font-size:11px;color:var(--muted);text-decoration:line-through">₹${p.original}</span>` : ''}</td>
+      <td><span style="font-weight:700;color:${p.stock===0?'var(--error)':'var(--text)'}">${p.stock}</span></td>
+      <td>
+        ${p.isBest ? '<span class="badge badge-best" style="margin-right:4px">Best</span>' : ''}
+        ${p.isNew  ? '<span class="badge badge-new">New</span>' : ''}
+      </td>
+      <td>
+        <button class="action-btn" onclick="editProduct(${p.id})">Edit</button>
+        <button class="action-btn danger" onclick="deleteProduct(${p.id})">Delete</button>
+      </td>
+    </tr>`).join('');
+}
+
+function filterAdminProducts(query) {
+  const rows = document.querySelectorAll('#admin-products-tbody tr');
+  rows.forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(query.toLowerCase()) ? '' : 'none';
+  });
+}
+
+function toggleAddProductForm() {
+  const form = document.getElementById('add-product-form');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+
+function addProductFromAdmin() {
+  const name = document.getElementById('new-prod-name')?.value.trim();
+  const cat  = document.getElementById('new-prod-cat')?.value;
+  const price = parseInt(document.getElementById('new-prod-price')?.value);
+  const stock = parseInt(document.getElementById('new-prod-stock')?.value);
+  const emoji = document.getElementById('new-prod-emoji')?.value || '🌿';
+  const isBest = document.getElementById('new-prod-best')?.checked;
+  const isNew  = document.getElementById('new-prod-new')?.checked;
+  if (!name || !price) { alert('Name and price are required.'); return; }
+  const newProd = { id: PRODUCTS.length + 1, name, cat, price, original: null, stock: stock || 0, isBest, isNew, emoji, tags: [] };
+  PRODUCTS.push(newProd);
+  renderAdminProducts();
+  renderShopGrid();
+  renderCarousels();
+  toggleAddProductForm();
+}
+
+function deleteProduct(id) {
+  if (!confirm('Delete this product?')) return;
+  const idx = PRODUCTS.findIndex(p => p.id === id);
+  if (idx !== -1) PRODUCTS.splice(idx, 1);
+  renderAdminProducts();
+  renderShopGrid();
+  renderCarousels();
+}
+
+function editProduct(id) {
+  alert('Edit functionality — coming in full build. Product ID: ' + id);
+}
+
+function renderAdminOrders(filter = 'All') {
+  const tbody = document.getElementById('admin-orders-tbody');
+  if (!tbody) return;
+  const orders = filter === 'All' ? MOCK_ORDERS : MOCK_ORDERS.filter(o => o.status === filter);
+  tbody.innerHTML = orders.map(o => {
+    const badgeClass = { Pending:'badge-pending', Processing:'badge-processing', Delivered:'badge-delivered', Cancelled:'badge-cancelled' }[o.status] || 'badge-pending';
+    return `<tr>
+      <td><strong>${o.id}</strong></td>
+      <td>${o.customer}</td>
+      <td style="color:var(--muted);font-size:13px">${o.date}</td>
+      <td><strong>₹${o.total.toLocaleString('en-IN')}</strong></td>
+      <td><span class="badge ${badgeClass}">${o.status}</span></td>
+      <td>
+        <select class="status-select" onchange="updateOrderStatus('${o.id}',this.value)">
+          <option ${o.status==='Pending'?'selected':''}>Pending</option>
+          <option ${o.status==='Processing'?'selected':''}>Processing</option>
+          <option ${o.status==='Delivered'?'selected':''}>Delivered</option>
+          <option ${o.status==='Cancelled'?'selected':''}>Cancelled</option>
+        </select>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function filterAdminOrders(status, btn) {
+  document.querySelectorAll('.status-filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderAdminOrders(status);
+}
+
+function updateOrderStatus(orderId, newStatus) {
+  const order = MOCK_ORDERS.find(o => o.id === orderId);
+  if (order) order.status = newStatus;
+}
+
+function addCategory() {
+  const input = document.getElementById('new-cat-input');
+  const name = input?.value.trim();
+  if (!name) return;
+  const list = document.getElementById('admin-cat-list');
+  const row = document.createElement('div');
+  row.className = 'cat-row';
+  row.innerHTML = `<div class="cat-row-name">🌿 ${name}</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">0 products</span><button class="action-btn danger" onclick="this.closest('.cat-row').remove()">Delete</button></div>`;
+  list.appendChild(row);
+  input.value = '';
+}
+</script>

@@ -1,0 +1,108 @@
+<style>
+  /* ── SHOP PAGE ── */
+  .shop-header-bar {
+    background: var(--surface);
+    border-bottom: 1.5px solid var(--border);
+    padding: 20px 0;
+  }
+  .shop-header-bar .container { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .shop-title { font-size: 22px; font-weight: 700; font-family: 'Inter', sans-serif; margin-right: auto; }
+  .shop-result-count { font-size: 13px; color: var(--muted); white-space: nowrap; }
+  .shop-sort {
+    padding: 9px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--surface);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .shop-sort:focus { border-color: var(--green-900); }
+
+  /* Category filter pills */
+  .shop-filter-bar {
+    background: var(--surface);
+    border-bottom: 1.5px solid var(--border);
+    padding: 14px 0;
+    position: sticky;
+    top: var(--nav-h);
+    z-index: 100;
+  }
+  .filter-pills { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px 4px; }
+  .filter-pills::-webkit-scrollbar { display: none; }
+  .filter-pill {
+    padding: 7px 18px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-2);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    flex-shrink: 0;
+  }
+  .filter-pill:hover { background: var(--green-50); border-color: var(--green-100); color: var(--green-900); }
+  .filter-pill.active { background: var(--green-900); border-color: var(--green-900); color: #fff; }
+
+  /* Product grid */
+  .shop-grid-wrap { padding: 36px 0 80px; }
+  .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+  .no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+  }
+  .no-results .icon { font-size: 52px; margin-bottom: 14px; }
+  .no-results p { font-size: 15px; margin-bottom: 20px; }
+
+  @media (max-width: 900px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 380px) { .product-grid { grid-template-columns: 1fr; } }
+</style>
+
+<!-- SHOP PAGE -->
+<div class="page" id="page-shop">
+
+  <div class="shop-header-bar">
+    <div class="container">
+      <h1 class="shop-title">Plants &amp; More</h1>
+      <span class="shop-result-count" id="shop-count">Showing 12 products</span>
+      <select class="shop-sort" id="shop-sort" onchange="applyShopFilters()">
+        <option value="featured">Featured</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="new">New Arrivals</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="shop-filter-bar">
+    <div class="container">
+      <div class="filter-pills" id="filter-pills">
+        <button class="filter-pill active" onclick="setShopFilter('All', this)">All</button>
+        <button class="filter-pill" onclick="setShopFilter('Indoor', this)">🪴 Indoor</button>
+        <button class="filter-pill" onclick="setShopFilter('Outdoor', this)">🌺 Outdoor</button>
+        <button class="filter-pill" onclick="setShopFilter('Balcony', this)">🌱 Balcony</button>
+        <button class="filter-pill" onclick="setShopFilter('Lucky Plants', this)">🎋 Lucky Plants</button>
+        <button class="filter-pill" onclick="setShopFilter('Planters', this)">🏺 Planters</button>
+        <button class="filter-pill" onclick="setShopFilter('Plant Care', this)">🌰 Plant Care</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="shop-grid-wrap">
+    <div class="container">
+      <div class="product-grid" id="shop-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+</div>

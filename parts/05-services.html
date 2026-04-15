@@ -1,0 +1,205 @@
+<style>
+  .svc-hero {
+    background: linear-gradient(135deg, var(--green-950) 0%, var(--green-900) 100%);
+    color: white;
+    padding: 64px 0;
+    text-align: center;
+  }
+  .svc-hero .section-label { color: var(--green-400); }
+  .svc-hero h1 { color: white; margin-bottom: 14px; }
+  .svc-hero p { opacity: 0.82; font-size: 16px; max-width: 500px; margin: 0 auto; }
+
+  .property-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .property-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .property-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+  .property-img {
+    height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 58px;
+  }
+  .property-img.villa    { background: linear-gradient(135deg, #D0EDDB, #B3DFCA); }
+  .property-img.apt      { background: linear-gradient(135deg, #DBEAFE, #BFDBFE); }
+  .property-img.office   { background: linear-gradient(135deg, #EDE9FE, #DDD6FE); }
+  .property-img.gated    { background: linear-gradient(135deg, #FEF3C7, #FDE68A); }
+  .property-img.farm     { background: linear-gradient(135deg, #FCE7F3, #FBCFE8); }
+  .property-img.indep    { background: linear-gradient(135deg, #FFEDD5, #FED7AA); }
+  .property-body { padding: 16px; }
+  .property-body h4 { font-weight: 700; font-size: 15px; margin-bottom: 5px; font-family: 'Inter', sans-serif; }
+  .property-body p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  .showcase-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .showcase-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 26px 20px;
+    text-align: center;
+    transition: box-shadow 0.2s;
+  }
+  .showcase-card:hover { box-shadow: var(--shadow-hover); }
+  .showcase-icon { font-size: 42px; margin-bottom: 12px; }
+  .showcase-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; font-family: 'Inter', sans-serif; }
+  .showcase-card p { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+  @media (max-width: 900px) {
+    .property-grid { grid-template-columns: repeat(2, 1fr); }
+    .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .property-grid { grid-template-columns: 1fr; }
+    .showcase-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<!-- SERVICES PAGE -->
+<div class="page" id="page-services">
+
+  <div class="svc-hero">
+    <div class="container">
+      <div class="section-label">LANDSCAPING</div>
+      <h1>Professional Landscaping<br>for Every Space</h1>
+      <p>From cozy balconies to sprawling farm houses — we design, install, and maintain green spaces across Hyderabad.</p>
+    </div>
+  </div>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px">
+        <div class="section-label">WE WORK WITH</div>
+        <h2 class="section-title">Any property type</h2>
+        <p class="section-sub" style="margin:0 auto">Residential, commercial, or agricultural — our team handles all scales.</p>
+      </div>
+      <div class="property-grid">
+        <div class="property-card">
+          <div class="property-img villa">🏡</div>
+          <div class="property-body">
+            <h4>Villa</h4>
+            <p>Garden design, lawn care, water features, and seasonal planting for private villas.</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <div class="property-img apt">🏢</div>
+          <div class="property-body">
+            <h4>Apartment</h4>
+            <p>Balcony gardens, terrace setups, and common area greening for apartment complexes.</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <div class="property-img office">🏬</div>
+          <div class="property-body">
+            <h4>Office</h4>
+            <p>Indoor plant arrangements, desk plants, vertical gardens, and lobby installations.</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <div class="property-img gated">🏘️</div>
+          <div class="property-body">
+            <h4>Gated Community</h4>
+            <p>Large-scale landscaping for gated communities including parks, walking trails, and entrance gardens.</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <div class="property-img farm">🌾</div>
+          <div class="property-body">
+            <h4>Farm House</h4>
+            <p>Organic kitchen gardens, orchards, and natural landscaping for farm properties.</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <div class="property-img indep">🏠</div>
+          <div class="property-body">
+            <h4>Independent House</h4>
+            <p>Front yard, backyard, and courtyard design for standalone residential properties.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px">
+        <div class="section-label">OUR SPECIALITY</div>
+        <h2 class="section-title">Signature Services</h2>
+      </div>
+      <div class="showcase-grid">
+        <div class="showcase-card">
+          <div class="showcase-icon">🧱</div>
+          <h4>Vertical Garden</h4>
+          <p>Living green walls for interiors and exteriors. Transform any blank wall into a statement.</p>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-icon">🌿</div>
+          <h4>New Balcony Setup</h4>
+          <p>Complete balcony transformation — planters, climbers, seating, and lighting.</p>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-icon">✂️</div>
+          <h4>Garden Maintenance</h4>
+          <p>Ongoing care plans: pruning, fertilising, pest control, and seasonal replanting.</p>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-icon">🏢</div>
+          <h4>Office Plants Setup</h4>
+          <p>Curated plant arrangements for desks, reception areas, meeting rooms, and atriums.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div style="max-width:600px;margin:0 auto">
+        <div style="text-align:center;margin-bottom:32px">
+          <div class="section-label">GET IN TOUCH</div>
+          <h2 class="section-title">Request a Landscaping Quote</h2>
+          <p class="section-sub" style="margin:0 auto">Tell us about your space and we'll reach out within 24 hours.</p>
+        </div>
+        <div id="svc-form-wrap">
+          <form onsubmit="submitInquiry(event,'svc')">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name *</label>
+                <input type="text" placeholder="e.g. Ramesh Kumar" required>
+              </div>
+              <div class="form-group">
+                <label>Phone Number *</label>
+                <input type="tel" placeholder="+91 98765 43210" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Property Type *</label>
+              <select required>
+                <option value="">Select property type</option>
+                <option>Villa</option>
+                <option>Apartment</option>
+                <option>Office</option>
+                <option>Gated Community</option>
+                <option>Farm House</option>
+                <option>Independent House</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tell us about your project</label>
+              <textarea placeholder="Describe your space, what you're looking for, any specific requirements..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full btn-lg">Send Inquiry →</button>
+          </form>
+        </div>
+        <div class="form-success" id="svc-success">
+          <div class="success-icon">✅</div>
+          <h4>Inquiry Received!</h4>
+          <p>Thank you! We'll review your requirements and call you within 24 hours to discuss your project.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

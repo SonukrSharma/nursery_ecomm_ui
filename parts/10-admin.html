@@ -1,0 +1,386 @@
+<style>
+  /* ── ADMIN ── */
+  .admin-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: calc(100vh - var(--bar-h) - var(--nav-h));
+  }
+  .admin-sidebar {
+    background: var(--green-950);
+    padding: 24px 0;
+    position: sticky;
+    top: var(--nav-h);
+    height: calc(100vh - var(--bar-h) - var(--nav-h));
+    overflow-y: auto;
+  }
+  .admin-sidebar-head {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 12px;
+  }
+  .admin-sidebar-head .title { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 2px; }
+  .admin-sidebar-head .name { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.88); }
+  .admin-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 20px;
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+  .admin-nav-item:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.9); }
+  .admin-nav-item.active { background: rgba(255,255,255,0.12); color: #fff; border-right: 3px solid var(--green-400); }
+  .admin-nav-item .a-icon { font-size: 16px; }
+
+  .admin-content { background: var(--sand); padding: 32px; overflow-y: auto; }
+  .admin-content-header { margin-bottom: 28px; }
+  .admin-content-header h2 { font-size: 24px; margin-bottom: 4px; }
+  .admin-content-header p { color: var(--muted); font-size: 14px; }
+
+  /* Stats */
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 28px; }
+  .stat-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 22px 20px;
+    border-left: 4px solid transparent;
+    transition: box-shadow 0.2s;
+  }
+  .stat-card:hover { box-shadow: var(--shadow-hover); }
+  .stat-card.green { border-left-color: var(--green-400); }
+  .stat-card.blue { border-left-color: #3B82F6; }
+  .stat-card.orange { border-left-color: #F59E0B; }
+  .stat-card.purple { border-left-color: #8B5CF6; }
+  .stat-label { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .stat-value { font-size: 30px; font-weight: 800; color: var(--text); margin-bottom: 4px; font-family: 'Inter', sans-serif; }
+  .stat-change { font-size: 12.5px; color: var(--success); font-weight: 600; }
+  .stat-change.neg { color: var(--error); }
+
+  /* Admin table */
+  .admin-table-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .admin-table-head {
+    padding: 18px 22px;
+    border-bottom: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .admin-table-head h3 { font-size: 15px; font-weight: 700; font-family: 'Inter', sans-serif; }
+  .admin-search {
+    display: flex;
+    align-items: center;
+    background: var(--sand);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    flex: 1;
+    max-width: 280px;
+  }
+  .admin-search input { flex: 1; padding: 8px 12px; border: none; background: none; font-size: 13px; color: var(--text); outline: none; }
+  .admin-search-icon { padding: 0 12px; color: var(--muted); font-size: 14px; }
+  .admin-table { width: 100%; border-collapse: collapse; }
+  .admin-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    padding: 12px 18px;
+    background: var(--sand);
+    border-bottom: 1.5px solid var(--border);
+    white-space: nowrap;
+  }
+  .admin-table td { padding: 13px 18px; font-size: 13.5px; border-bottom: 1.5px solid var(--border); vertical-align: middle; }
+  .admin-table tr:last-child td { border-bottom: none; }
+  .admin-table tr:hover td { background: var(--sand); }
+
+  /* Action buttons */
+  .action-btn {
+    background: var(--green-50);
+    color: var(--green-900);
+    border: 1.5px solid var(--green-100);
+    border-radius: var(--radius-sm);
+    padding: 5px 11px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: background 0.15s;
+    font-family: 'Inter', sans-serif;
+  }
+  .action-btn:hover { background: var(--green-100); }
+  .action-btn.danger { background: #FEE2E2; color: var(--error); border-color: #FECACA; }
+  .action-btn.danger:hover { background: #FECACA; }
+
+  .status-select {
+    padding: 5px 10px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 12.5px;
+    cursor: pointer;
+    background: white;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+  }
+
+  /* Admin tabs */
+  .admin-tab-panel { display: none; }
+  .admin-tab-panel.active { display: block; }
+
+  /* Status filter pills for orders */
+  .status-filter-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .status-filter-btn {
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .status-filter-btn.active { background: var(--green-900); border-color: var(--green-900); color: #fff; }
+
+  /* Categories */
+  .cat-list { display: flex; flex-direction: column; gap: 10px; }
+  .cat-row {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cat-row-name { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+  .cat-row-count { font-size: 12px; color: var(--muted); }
+  .add-cat-row { display: flex; gap: 10px; margin-top: 14px; }
+  .add-cat-row input { flex: 1; }
+
+  @media (max-width: 768px) {
+    .admin-layout { grid-template-columns: 1fr; }
+    .admin-sidebar { position: static; height: auto; display: flex; overflow-x: auto; padding: 8px 0; gap: 0; }
+    .admin-sidebar-head { display: none; }
+    .admin-nav-item { padding: 10px 14px; white-space: nowrap; flex-shrink: 0; border-right: none !important; }
+    .admin-nav-item.active { border-bottom: 3px solid var(--green-400); }
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 480px) {
+    .admin-content { padding: 20px 16px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<!-- ADMIN PAGE -->
+<div class="page" id="page-admin">
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+      <div class="admin-sidebar-head">
+        <div class="title">Admin Panel</div>
+        <div class="name" id="admin-sidebar-name">Admin</div>
+      </div>
+      <button class="admin-nav-item active" onclick="switchAdminTab('dashboard',this)"><span class="a-icon">📊</span> Dashboard</button>
+      <button class="admin-nav-item" onclick="switchAdminTab('products',this)"><span class="a-icon">🌿</span> Products</button>
+      <button class="admin-nav-item" onclick="switchAdminTab('orders',this)"><span class="a-icon">📦</span> Orders</button>
+      <button class="admin-nav-item" onclick="switchAdminTab('inquiries',this)"><span class="a-icon">📋</span> Inquiries</button>
+      <button class="admin-nav-item" onclick="switchAdminTab('categories',this)"><span class="a-icon">🏷️</span> Categories</button>
+      <button class="admin-nav-item" onclick="showPage('home')" style="margin-top:24px;border-top:1px solid rgba(255,255,255,0.08);padding-top:20px"><span class="a-icon">↩</span> Back to Site</button>
+    </div>
+
+    <!-- Content -->
+    <div class="admin-content">
+
+      <!-- DASHBOARD -->
+      <div class="admin-tab-panel active" id="admin-tab-dashboard">
+        <div class="admin-content-header">
+          <h2>Dashboard</h2>
+          <p>Overview of your store</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card green">
+            <div class="stat-label">Total Orders</div>
+            <div class="stat-value">24</div>
+            <div class="stat-change">↑ 4 this week</div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-label">Revenue</div>
+            <div class="stat-value">₹52,400</div>
+            <div class="stat-change">↑ 12% vs last month</div>
+          </div>
+          <div class="stat-card orange">
+            <div class="stat-label">Active Products</div>
+            <div class="stat-value">12</div>
+            <div class="stat-change neg">2 out of stock</div>
+          </div>
+          <div class="stat-card purple">
+            <div class="stat-label">Pending Inquiries</div>
+            <div class="stat-value">6</div>
+            <div class="stat-change">3 landscaping · 3 gifting</div>
+          </div>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-head">
+            <h3>Recent Orders</h3>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order #</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>SNL-2026-00005</strong></td><td>Arun K.</td><td>2 items</td><td>₹2,340</td><td><span class="badge badge-pending">Pending</span></td><td><button class="action-btn">View</button></td></tr>
+              <tr><td><strong>SNL-2026-00004</strong></td><td>Meena S.</td><td>3 items</td><td>₹3,150</td><td><span class="badge badge-processing">Processing</span></td><td><button class="action-btn">View</button></td></tr>
+              <tr><td><strong>SNL-2026-00003</strong></td><td>Priya R.</td><td>2 items</td><td>₹1,999</td><td><span class="badge badge-processing">Processing</span></td><td><button class="action-btn">View</button></td></tr>
+              <tr><td><strong>SNL-2026-00002</strong></td><td>Rajesh M.</td><td>4 items</td><td>₹4,200</td><td><span class="badge badge-delivered">Delivered</span></td><td><button class="action-btn">View</button></td></tr>
+              <tr><td><strong>SNL-2026-00001</strong></td><td>Priya R.</td><td>5 items</td><td>₹1,557</td><td><span class="badge badge-delivered">Delivered</span></td><td><button class="action-btn">View</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div class="admin-tab-panel" id="admin-tab-products">
+        <div class="admin-content-header">
+          <h2>Products</h2>
+          <p>Manage your plant and product catalog</p>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-head">
+            <h3>All Products</h3>
+            <div class="admin-search">
+              <span class="admin-search-icon">🔍</span>
+              <input type="text" placeholder="Search products..." oninput="filterAdminProducts(this.value)">
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="toggleAddProductForm()">+ Add Product</button>
+          </div>
+
+          <!-- Add product form (hidden by default) -->
+          <div id="add-product-form" style="display:none;padding:20px;border-bottom:1.5px solid var(--border);background:var(--green-50)">
+            <div style="font-weight:700;font-size:14px;margin-bottom:16px">Add New Product</div>
+            <div class="form-row">
+              <div class="form-group"><label>Product Name</label><input type="text" id="new-prod-name" placeholder="e.g. Money Plant"></div>
+              <div class="form-group"><label>Category</label>
+                <select id="new-prod-cat">
+                  <option>Indoor</option><option>Outdoor</option><option>Balcony</option>
+                  <option>Lucky Plants</option><option>Planters</option><option>Plant Care</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Price (₹)</label><input type="number" id="new-prod-price" placeholder="399"></div>
+              <div class="form-group"><label>Stock</label><input type="number" id="new-prod-stock" placeholder="10"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Emoji</label><input type="text" id="new-prod-emoji" placeholder="🌿" maxlength="4"></div>
+              <div class="form-group" style="display:flex;align-items:flex-end;gap:10px">
+                <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;margin-bottom:0">
+                  <input type="checkbox" id="new-prod-best"> Best Seller
+                </label>
+                <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;margin-bottom:0">
+                  <input type="checkbox" id="new-prod-new"> New Arrival
+                </label>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:4px">
+              <button class="btn btn-primary btn-sm" onclick="addProductFromAdmin()">Save Product</button>
+              <button class="btn btn-ghost btn-sm" onclick="toggleAddProductForm()">Cancel</button>
+            </div>
+          </div>
+
+          <table class="admin-table" id="admin-products-table">
+            <thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Tags</th><th>Actions</th></tr></thead>
+            <tbody id="admin-products-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ORDERS -->
+      <div class="admin-tab-panel" id="admin-tab-orders">
+        <div class="admin-content-header">
+          <h2>Orders</h2>
+          <p>Manage and update customer orders</p>
+        </div>
+        <div class="status-filter-bar">
+          <button class="status-filter-btn active" onclick="filterAdminOrders('All',this)">All</button>
+          <button class="status-filter-btn" onclick="filterAdminOrders('Pending',this)">Pending</button>
+          <button class="status-filter-btn" onclick="filterAdminOrders('Processing',this)">Processing</button>
+          <button class="status-filter-btn" onclick="filterAdminOrders('Delivered',this)">Delivered</button>
+          <button class="status-filter-btn" onclick="filterAdminOrders('Cancelled',this)">Cancelled</button>
+        </div>
+        <div class="admin-table-card">
+          <table class="admin-table">
+            <thead><tr><th>Order #</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th>Update</th></tr></thead>
+            <tbody id="admin-orders-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- INQUIRIES -->
+      <div class="admin-tab-panel" id="admin-tab-inquiries">
+        <div class="admin-content-header">
+          <h2>Inquiries</h2>
+          <p>Landscaping and gifting inquiries from customers</p>
+        </div>
+        <div class="admin-table-card">
+          <table class="admin-table">
+            <thead><tr><th>Name</th><th>Phone</th><th>Type</th><th>Details</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="admin-inquiries-tbody">
+              <tr><td>Ravi Kumar</td><td>+91 98001 12345</td><td><span class="badge badge-new">Landscaping</span></td><td>Villa, Banjara Hills</td><td>14 Apr</td><td><span class="badge badge-pending">New</span></td><td><button class="action-btn">Resolve</button></td></tr>
+              <tr><td>Sunita Rao</td><td>+91 99887 65432</td><td><span class="badge badge-processing">Gifting</span></td><td>Corporate, 50 units</td><td>13 Apr</td><td><span class="badge badge-pending">New</span></td><td><button class="action-btn">Resolve</button></td></tr>
+              <tr><td>Deepak M.</td><td>+91 97654 32109</td><td><span class="badge badge-new">Landscaping</span></td><td>Office, Hitech City</td><td>12 Apr</td><td><span class="badge badge-processing">In Progress</span></td><td><button class="action-btn">Resolve</button></td></tr>
+              <tr><td>Ananya S.</td><td>+91 90000 11223</td><td><span class="badge badge-processing">Gifting</span></td><td>Wedding, 100 units</td><td>11 Apr</td><td><span class="badge badge-delivered">Resolved</span></td><td><button class="action-btn danger">Archive</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- CATEGORIES -->
+      <div class="admin-tab-panel" id="admin-tab-categories">
+        <div class="admin-content-header">
+          <h2>Categories</h2>
+          <p>Manage product categories</p>
+        </div>
+        <div class="admin-table-card" style="padding:24px">
+          <div class="cat-list" id="admin-cat-list">
+            <div class="cat-row"><div class="cat-row-name">🪴 Indoor</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">5 products</span><button class="action-btn danger">Delete</button></div></div>
+            <div class="cat-row"><div class="cat-row-name">🌺 Outdoor</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">1 product</span><button class="action-btn danger">Delete</button></div></div>
+            <div class="cat-row"><div class="cat-row-name">🌱 Balcony</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">2 products</span><button class="action-btn danger">Delete</button></div></div>
+            <div class="cat-row"><div class="cat-row-name">🎋 Lucky Plants</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">2 products</span><button class="action-btn danger">Delete</button></div></div>
+            <div class="cat-row"><div class="cat-row-name">🏺 Planters</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">1 product</span><button class="action-btn danger">Delete</button></div></div>
+            <div class="cat-row"><div class="cat-row-name">🌰 Plant Care</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">2 products</span><button class="action-btn danger">Delete</button></div></div>
+          </div>
+          <div class="add-cat-row">
+            <input class="form-group input" type="text" id="new-cat-input" placeholder="New category name..." style="padding:9px 14px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:14px;flex:1;background:white;outline:none">
+            <button class="btn btn-primary btn-sm" onclick="addCategory()">Add Category</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

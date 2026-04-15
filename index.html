@@ -1,0 +1,3737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sridevi Nursery &amp; Landscaping — Hyderabad</title>
+  <meta name="description" content="Hyderabad's trusted plant store. Indoor &amp; outdoor plants, landscaping services, and plant gifting — delivered to your door.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap');
+
+  /* ── TOKENS ── */
+  :root {
+    --green-950: #0D2119;
+    --green-900: #1A3D2B;
+    --green-700: #2A6044;
+    --green-400: #4CAF73;
+    --green-100: #D0EDDB;
+    --green-50:  #EEF8F2;
+    --sand:      #F8F9F5;
+    --surface:   #FFFFFF;
+    --border:    #E4EAE6;
+    --border-2:  #C8D4CB;
+    --text:      #111815;
+    --text-2:    #3D4F44;
+    --muted:     #899690;
+    --brown:     #7C4A1E;
+    --brown-light: #F5EDE4;
+    --error:     #DC2626;
+    --success:   #16A34A;
+
+    --radius-sm:  6px;
+    --radius:     8px;
+    --radius-md:  14px;
+    --radius-lg:  20px;
+    --radius-pill:40px;
+
+    --shadow-hover: 0 8px 32px rgba(26,61,43,0.13);
+    --shadow-modal: 0 24px 64px rgba(0,0,0,0.18);
+    --shadow-card:  0 2px 8px rgba(0,0,0,0.06);
+
+    --nav-h: 64px;
+    --bar-h: 38px;
+  }
+
+  /* ── RESET ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--sand);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit; }
+  img { display: block; max-width: 100%; }
+  button { font-family: inherit; cursor: pointer; }
+  input, select, textarea { font-family: inherit; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--green-50); }
+  ::-webkit-scrollbar-thumb { background: var(--green-100); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--green-400); }
+
+  /* ── TYPOGRAPHY ── */
+  .serif { font-family: 'DM Serif Display', Georgia, serif; }
+  h1,h2,h3 { font-family: 'DM Serif Display', Georgia, serif; line-height: 1.2; }
+  h1 { font-size: clamp(38px, 5vw, 64px); }
+  h2 { font-size: clamp(28px, 3.5vw, 42px); }
+  h3 { font-size: clamp(20px, 2.5vw, 28px); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .section { padding: 80px 0; }
+  .section-alt { background: var(--surface); }
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── SECTION HEADERS ── */
+  .section-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--green-400);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 3vw, 38px);
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 480px;
+  }
+  .section-header-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    gap: 16px;
+  }
+  .section-header-row .header-left { flex: 1; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    border: 2px solid transparent;
+    transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.15s;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary {
+    background: var(--green-900);
+    color: #fff;
+    border-color: var(--green-900);
+  }
+  .btn-primary:hover { background: var(--green-700); border-color: var(--green-700); }
+  .btn-outline {
+    background: transparent;
+    color: var(--green-900);
+    border-color: var(--green-900);
+  }
+  .btn-outline:hover { background: var(--green-900); color: #fff; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-2);
+    border-color: transparent;
+  }
+  .btn-ghost:hover { background: var(--green-50); color: var(--green-900); }
+  .btn-white {
+    background: #fff;
+    color: var(--green-900);
+    border-color: #fff;
+  }
+  .btn-white:hover { background: var(--green-50); }
+  .btn-brown {
+    background: var(--brown);
+    color: #fff;
+    border-color: var(--brown);
+  }
+  .btn-brown:hover { background: #6a3d18; border-color: #6a3d18; }
+  .btn-sm { padding: 8px 16px; font-size: 13px; }
+  .btn-lg { padding: 14px 28px; font-size: 16px; }
+  .btn-full { width: 100%; }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* ── BADGES / TAGS ── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+  .badge-new { background: var(--green-100); color: var(--green-900); border: 1px solid var(--green-100); }
+  .badge-best { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+  .badge-out { background: #F3F4F6; color: #6B7280; border: 1px solid #E5E7EB; }
+  .badge-delivered { background: var(--green-50); color: var(--success); border: 1px solid var(--green-100); }
+  .badge-processing { background: #FEF9C3; color: #A16207; border: 1px solid #FEF08A; }
+  .badge-pending { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+  .badge-cancelled { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    border-radius: var(--radius-pill);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    background: var(--sand);
+    border: 1px solid var(--border);
+  }
+
+  /* ── FORMS ── */
+  .form-group { margin-bottom: 18px; }
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-2);
+    margin-bottom: 6px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 14px;
+    color: var(--text);
+    background: var(--surface);
+    outline: none;
+    transition: border-color 0.18s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--green-900);
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: var(--muted); }
+  .form-group textarea { resize: vertical; min-height: 96px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .form-error { font-size: 12px; color: var(--error); margin-top: 4px; display: none; }
+  .form-error.show { display: block; }
+  .input-success { border-color: var(--success) !important; }
+  .input-error { border-color: var(--error) !important; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--border-2);
+  }
+
+  /* ── PRODUCT CARDS ── */
+  .product-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .product-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px);
+  }
+  .product-img {
+    height: 210px;
+    background: var(--green-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    position: relative;
+  }
+  .product-img .badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .product-body { padding: 16px; }
+  .product-cat {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--green-400);
+    margin-bottom: 4px;
+  }
+  .product-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .product-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+  .product-price { display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+  .product-price .price {
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--green-900);
+  }
+  .product-price .original {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+  .product-actions { display: flex; gap: 8px; }
+  .product-actions .btn { flex: 1; font-size: 13px; padding: 9px 12px; }
+  .out-of-stock .product-img::after {
+    content: 'Out of Stock';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(17,24,21,0.65);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    padding: 7px;
+    font-family: 'Inter', sans-serif;
+  }
+  .out-of-stock .btn-primary { background: var(--muted); border-color: var(--muted); pointer-events: none; }
+
+  /* ── QTY STEPPER ── */
+  .qty-stepper { display: inline-flex; align-items: center; gap: 10px; }
+  .qty-btn {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-2);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .qty-btn:hover { background: var(--green-50); border-color: var(--green-900); color: var(--green-900); }
+  .qty-val { font-weight: 700; font-size: 15px; min-width: 24px; text-align: center; }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1.5px solid var(--border); margin: 24px 0; }
+
+  /* ── EMPTY STATE ── */
+  .empty-state { text-align: center; padding: 64px 20px; color: var(--muted); }
+  .empty-state .empty-icon { font-size: 56px; margin-bottom: 16px; }
+  .empty-state h3 { font-family: 'Inter', sans-serif; font-size: 18px; color: var(--text-2); margin-bottom: 8px; }
+  .empty-state p { font-size: 14px; margin-bottom: 24px; }
+
+  /* ── OVERLAY ── */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 300;
+    display: none;
+    backdrop-filter: blur(2px);
+  }
+  .overlay.open { display: block; }
+
+  /* ── SUCCESS STATE (forms) ── */
+  .form-success {
+    background: var(--green-50);
+    border: 1.5px solid var(--green-100);
+    border-radius: var(--radius-md);
+    padding: 40px 32px;
+    text-align: center;
+    display: none;
+  }
+  .form-success.show { display: block; }
+  .form-success .success-icon { font-size: 48px; margin-bottom: 14px; }
+  .form-success h4 { font-size: 20px; font-family: 'DM Serif Display', serif; color: var(--green-900); margin-bottom: 8px; }
+  .form-success p { color: var(--muted); font-size: 14px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .section { padding: 56px 0; }
+    .form-row { grid-template-columns: 1fr; }
+    .section-header-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 0 16px; }
+    h1 { font-size: 32px; }
+  }
+</style>
+
+</head>
+<body>
+
+<!-- ===== 02-shared.html ===== -->
+<style>
+  /* ── TOP BAR ── */
+  .top-bar {
+    background: var(--green-950);
+    color: rgba(255,255,255,0.88);
+    font-size: 12.5px;
+    font-weight: 500;
+    padding: 0 24px;
+    height: var(--bar-h);
+    display: flex;
+    align-items: center;
+  }
+  .top-bar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .top-bar-points { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+  .top-bar-point {
+    padding: 0 16px;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    white-space: nowrap;
+  }
+  .top-bar-point:first-child { padding-left: 0; }
+  .top-bar-point:last-child { border-right: none; }
+  .top-bar-right { opacity: 0.75; white-space: nowrap; font-size: 12px; }
+  .top-bar-right a { color: var(--green-400); font-weight: 600; }
+
+  /* ── NAVBAR ── */
+  nav {
+    background: var(--surface);
+    border-bottom: 1.5px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    height: var(--nav-h);
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 24px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .nav-logo-icon {
+    width: 36px; height: 36px;
+    background: var(--green-900);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .nav-logo-text { line-height: 1.25; }
+  .nav-logo-text .name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--green-900);
+    display: block;
+  }
+  .nav-logo-text .sub {
+    font-size: 10.5px;
+    color: var(--muted);
+    display: block;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: 12px;
+    flex: 1;
+  }
+  .nav-link {
+    padding: 7px 13px;
+    border-radius: var(--radius);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+    background: none;
+    border: none;
+  }
+  .nav-link:hover, .nav-link.active {
+    background: var(--green-50);
+    color: var(--green-900);
+  }
+  .nav-link.admin-link { color: var(--brown); }
+  .nav-link.admin-link:hover { background: var(--brown-light); color: var(--brown); }
+  .nav-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; flex-shrink: 0; }
+
+  .cart-btn {
+    position: relative;
+    background: var(--green-50);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .cart-btn:hover { background: var(--green-100); }
+  .cart-badge {
+    position: absolute;
+    top: -7px; right: -7px;
+    background: var(--green-900);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 18px; height: 18px;
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 4px;
+    display: none;
+  }
+  .cart-badge.show { display: flex; }
+
+  .nav-user-btn {
+    background: var(--green-900);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .nav-user-btn:hover { background: var(--green-700); }
+  .nav-user-btn.logged-in { background: var(--green-50); color: var(--green-900); border: 1.5px solid var(--border); }
+  .nav-user-btn.logged-in:hover { background: var(--green-100); }
+
+  /* Hamburger */
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: var(--text);
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 8px;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: calc(var(--bar-h) + var(--nav-h));
+    left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1.5px solid var(--border);
+    padding: 12px 16px;
+    z-index: 199;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: var(--shadow-card);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu .nav-link { width: 100%; text-align: left; padding: 11px 14px; }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: block; }
+    .top-bar-point:nth-child(n+3) { display: none; }
+  }
+  @media (max-width: 480px) {
+    .top-bar-right { display: none; }
+  }
+
+  /* ── CART SIDEBAR ── */
+  .cart-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 400;
+    display: none;
+    backdrop-filter: blur(2px);
+  }
+  .cart-overlay.open { display: block; }
+  .cart-sidebar {
+    position: fixed;
+    top: 0; right: -420px;
+    width: 400px;
+    height: 100vh;
+    background: var(--surface);
+    z-index: 401;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.3s cubic-bezier(.4,0,.2,1);
+    box-shadow: -8px 0 40px rgba(0,0,0,0.12);
+  }
+  .cart-sidebar.open { right: 0; }
+  .cart-head {
+    padding: 20px 24px;
+    border-bottom: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .cart-head h3 { font-size: 18px; font-weight: 700; }
+  .cart-head-right { display: flex; align-items: center; gap: 10px; }
+  .cart-close {
+    background: var(--sand);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .cart-close:hover { background: var(--green-50); color: var(--text); }
+  .cart-items { flex: 1; overflow-y: auto; padding: 16px; }
+  .cart-item {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .cart-item:last-child { border-bottom: none; }
+  .cart-item-emoji {
+    width: 68px; height: 68px;
+    background: var(--green-50);
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+  .cart-item-info { flex: 1; min-width: 0; }
+  .cart-item-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; line-height: 1.3; }
+  .cart-item-cat { font-size: 11px; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .cart-item-row { display: flex; align-items: center; justify-content: space-between; }
+  .cart-item-price { font-weight: 700; font-size: 15px; color: var(--green-900); }
+  .cart-remove {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: color 0.15s;
+    flex-shrink: 0;
+  }
+  .cart-remove:hover { color: var(--error); }
+
+  /* Delivery progress */
+  .cart-progress-wrap {
+    margin: 4px 16px 0;
+    background: var(--green-50);
+    border: 1.5px solid var(--green-100);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    flex-shrink: 0;
+  }
+  .cart-progress-label { font-size: 12.5px; color: var(--text-2); margin-bottom: 8px; }
+  .cart-progress-label span { font-weight: 700; color: var(--green-900); }
+  .progress-track { background: var(--green-100); border-radius: 4px; height: 5px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--green-400); border-radius: 4px; transition: width 0.4s; }
+
+  /* Cart footer */
+  .cart-footer {
+    padding: 16px 20px;
+    border-top: 1.5px solid var(--border);
+    flex-shrink: 0;
+  }
+  .cart-summary { margin-bottom: 14px; }
+  .cart-summary-row {
+    display: flex; justify-content: space-between;
+    font-size: 13.5px; color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .cart-summary-row.total {
+    font-size: 16px; font-weight: 700;
+    color: var(--text);
+    padding-top: 10px; margin-top: 6px;
+    border-top: 1.5px solid var(--border);
+  }
+  .cart-summary-row.total span:last-child { color: var(--green-900); }
+  .cart-min-warn {
+    font-size: 12px;
+    color: var(--brown);
+    background: var(--brown-light);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    display: none;
+  }
+  .cart-min-warn.show { display: block; }
+
+  /* Empty cart */
+  .cart-empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+  .cart-empty .e-icon { font-size: 52px; margin-bottom: 14px; }
+  .cart-empty p { font-size: 14px; margin-bottom: 20px; }
+
+  @media (max-width: 480px) {
+    .cart-sidebar { width: 100vw; right: -100vw; }
+  }
+
+  /* ── TOAST ── */
+  #toast-container {
+    position: fixed;
+    top: 20px; right: 20px;
+    z-index: 600;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+  }
+  .toast {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 300px;
+    max-width: 360px;
+    box-shadow: var(--shadow-modal);
+    pointer-events: all;
+    animation: toastIn 0.3s cubic-bezier(.4,0,.2,1);
+    border-left: 4px solid var(--green-400);
+  }
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateX(40px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .toast.out { animation: toastOut 0.25s ease forwards; }
+  @keyframes toastOut {
+    to { opacity: 0; transform: translateX(40px); }
+  }
+  .toast-emoji { font-size: 30px; flex-shrink: 0; }
+  .toast-body { flex: 1; min-width: 0; }
+  .toast-title { font-weight: 700; font-size: 13.5px; color: var(--text); margin-bottom: 2px; }
+  .toast-sub { font-size: 12px; color: var(--muted); }
+  .toast-link { font-size: 12px; color: var(--green-900); font-weight: 600; cursor: pointer; margin-top: 4px; display: block; }
+  .toast-close {
+    background: none; border: none;
+    color: var(--muted); font-size: 16px;
+    cursor: pointer; flex-shrink: 0;
+    padding: 2px;
+    transition: color 0.15s;
+  }
+  .toast-close:hover { color: var(--text); }
+
+  /* ── WHATSAPP ── */
+  .whatsapp-btn {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    width: 54px; height: 54px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+    z-index: 250;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    border: none;
+  }
+  .whatsapp-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+
+  /* ── MODAL (product) ── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 500;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(3px);
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    max-width: 760px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-modal);
+    position: relative;
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: var(--sand);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: var(--muted);
+    cursor: pointer; z-index: 1;
+  }
+  .modal-close:hover { background: var(--green-50); color: var(--text); }
+  .modal-body { display: grid; grid-template-columns: 1fr 1fr; min-height: 380px; }
+  .modal-img {
+    background: var(--green-50);
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 110px;
+    min-height: 320px;
+  }
+  .modal-info { padding: 32px 28px; }
+  .modal-cat { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--green-400); margin-bottom: 8px; }
+  .modal-name { font-size: 26px; color: var(--text); margin-bottom: 10px; line-height: 1.25; }
+  .modal-price { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+  .modal-price .price { font-size: 24px; font-weight: 800; color: var(--green-900); }
+  .modal-price .original { font-size: 14px; color: var(--muted); text-decoration: line-through; }
+  .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .modal-qty-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+  .modal-actions { display: flex; gap: 10px; }
+  .modal-actions .btn { flex: 1; }
+  .modal-stock { font-size: 12px; color: var(--muted); margin-top: 12px; }
+  @media (max-width: 600px) {
+    .modal-body { grid-template-columns: 1fr; }
+    .modal-img { border-radius: var(--radius-lg) var(--radius-lg) 0 0; min-height: 200px; font-size: 80px; }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--green-950);
+    color: rgba(255,255,255,0.82);
+    padding: 60px 0 28px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+  .footer-brand .footer-logo {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px;
+  }
+  .footer-logo-icon {
+    width: 34px; height: 34px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .footer-logo-name { font-size: 15px; font-weight: 700; color: #fff; }
+  .footer-brand p { font-size: 13.5px; line-height: 1.75; margin-bottom: 20px; }
+  .footer-socials { display: flex; gap: 8px; }
+  .social-btn {
+    width: 34px; height: 34px;
+    background: rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+  }
+  .social-btn:hover { background: rgba(255,255,255,0.2); }
+  .footer-col h4 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 16px;
+  }
+  .footer-col a {
+    display: block;
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.38);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="top-bar-points">
+      <span class="top-bar-point">🚚 Hyderabad delivery only</span>
+      <span class="top-bar-point">📦 Min. order ₹1,999</span>
+      <span class="top-bar-point">🎉 Free delivery on ₹500+</span>
+      <span class="top-bar-point">🌿 Wholesale from ₹1,999</span>
+    </div>
+    <div class="top-bar-right">📞 <a href="tel:+919876543210">+91 98765 43210</a></div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="showPage('home')">
+      <div class="nav-logo-icon">🌿</div>
+      <div class="nav-logo-text">
+        <span class="name">Sridevi Nursery</span>
+        <span class="sub">& Landscaping</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <button class="nav-link active" onclick="showPage('home')">Home</button>
+      <button class="nav-link" onclick="showPage('shop')">Shop</button>
+      <button class="nav-link" onclick="showPage('services')">Services</button>
+      <button class="nav-link" onclick="showPage('gifting')">Gifting</button>
+      <button class="nav-link" onclick="showPage('about')">About</button>
+      <button class="nav-link admin-link" id="admin-nav-link" style="display:none" onclick="showPage('admin')">⚙ Admin</button>
+    </div>
+    <div class="nav-actions">
+      <button class="cart-btn" onclick="toggleCart()" aria-label="Cart">
+        🛒
+        <span class="cart-badge" id="cart-badge">0</span>
+      </button>
+      <button class="nav-user-btn" id="nav-user-btn" onclick="handleUserBtnClick()">Login</button>
+      <button class="nav-hamburger" onclick="toggleMobileMenu()">☰</button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="nav-link" onclick="showPage('home');closeMobileMenu()">Home</button>
+  <button class="nav-link" onclick="showPage('shop');closeMobileMenu()">Shop</button>
+  <button class="nav-link" onclick="showPage('services');closeMobileMenu()">Services</button>
+  <button class="nav-link" onclick="showPage('gifting');closeMobileMenu()">Gifting</button>
+  <button class="nav-link" onclick="showPage('about');closeMobileMenu()">About</button>
+  <button class="nav-link admin-link" id="admin-nav-link-mobile" style="display:none" onclick="showPage('admin');closeMobileMenu()">⚙ Admin</button>
+</div>
+
+<!-- CART OVERLAY + SIDEBAR -->
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-head">
+    <h3>Your Cart</h3>
+    <div class="cart-head-right">
+      <span id="cart-count-label" style="font-size:13px;color:var(--muted)"></span>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+  </div>
+  <div class="cart-progress-wrap" id="cart-progress-wrap">
+    <div class="cart-progress-label" id="cart-progress-label">Add <span id="cart-progress-need">₹1,999</span> more to place order</div>
+    <div class="progress-track"><div class="progress-fill" id="cart-progress-fill" style="width:0%"></div></div>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="cart-empty">
+      <div class="e-icon">🌱</div>
+      <p>Your cart is empty</p>
+      <button class="btn btn-outline btn-sm" onclick="toggleCart();showPage('shop')">Browse Plants</button>
+    </div>
+  </div>
+  <div class="cart-footer" id="cart-footer" style="display:none">
+    <div class="cart-summary">
+      <div class="cart-summary-row"><span>Subtotal</span><span id="cart-subtotal">₹0</span></div>
+      <div class="cart-summary-row"><span>Delivery</span><span id="cart-delivery">₹50</span></div>
+      <div class="cart-summary-row total"><span>Total</span><span id="cart-total">₹0</span></div>
+    </div>
+    <div class="cart-min-warn" id="cart-min-warn">Min. order ₹1,999 required to checkout</div>
+    <button class="btn btn-primary btn-full" id="cart-checkout-btn" onclick="goToCheckout()">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div id="toast-container"></div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="product-modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-body">
+      <div class="modal-img" id="modal-img">🌿</div>
+      <div class="modal-info">
+        <div class="modal-cat" id="modal-cat"></div>
+        <h3 class="modal-name serif" id="modal-name"></h3>
+        <div class="modal-price">
+          <span class="price" id="modal-price"></span>
+          <span class="original" id="modal-original"></span>
+        </div>
+        <div class="modal-tags" id="modal-tags"></div>
+        <div class="modal-qty-row">
+          <span style="font-size:13px;font-weight:600;color:var(--text-2)">Qty:</span>
+          <div class="qty-stepper">
+            <button class="qty-btn" onclick="modalQtyChange(-1)">−</button>
+            <span class="qty-val" id="modal-qty">1</span>
+            <button class="qty-btn" onclick="modalQtyChange(1)">+</button>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-outline" onclick="modalAddToCart()">Add to Cart</button>
+          <button class="btn btn-primary" onclick="modalBuyNow()">Buy Now →</button>
+        </div>
+        <div class="modal-stock" id="modal-stock"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ===== 03-home.html ===== -->
+<style>
+  /* ── HERO ── */
+  .hero {
+    background: var(--surface);
+    padding: 72px 0 80px;
+    overflow: hidden;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+  }
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-50);
+    border: 1.5px solid var(--green-100);
+    border-radius: var(--radius-pill);
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--green-900);
+    margin-bottom: 20px;
+  }
+  .hero h1 { margin-bottom: 20px; }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--green-400);
+    font-family: 'DM Serif Display', serif;
+  }
+  .hero-desc {
+    font-size: 17px;
+    color: var(--text-2);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    max-width: 440px;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .hero-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .hero-trust-item .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green-400); }
+
+  /* Hero visual */
+  .hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 460px;
+  }
+  .hero-circle {
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-50) 0%, var(--green-100) 100%);
+    border: 2px solid var(--green-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 160px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .hero-stat {
+    position: absolute;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    box-shadow: var(--shadow-hover);
+    white-space: nowrap;
+  }
+  .hero-stat .stat-num { font-size: 18px; font-weight: 800; color: var(--green-900); display: block; }
+  .hero-stat .stat-label { font-size: 11px; color: var(--muted); font-weight: 500; }
+  .hero-stat-1 { top: 40px; left: -20px; }
+  .hero-stat-2 { bottom: 60px; left: -30px; }
+  .hero-stat-3 { top: 80px; right: -30px; }
+
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual { height: 300px; }
+    .hero-circle { width: 260px; height: 260px; font-size: 110px; }
+    .hero-stat-1 { top: 10px; left: 10px; }
+    .hero-stat-2 { bottom: 10px; left: 10px; }
+    .hero-stat-3 { top: 10px; right: 10px; }
+  }
+  @media (max-width: 480px) {
+    .hero { padding: 48px 0 56px; }
+    .hero-visual { height: 240px; }
+    .hero-circle { width: 200px; height: 200px; font-size: 90px; }
+    .hero-stat { padding: 8px 12px; }
+    .hero-stat .stat-num { font-size: 15px; }
+  }
+
+  /* ── CATEGORIES ── */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+  }
+  .cat-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 22px 12px 18px;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .cat-card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: var(--green-100);
+    transform: translateY(-3px);
+  }
+  .cat-icon { font-size: 34px; margin-bottom: 10px; }
+  .cat-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .cat-count { font-size: 11px; color: var(--muted); }
+
+  @media (max-width: 900px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 480px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ── CAROUSEL ── */
+  .carousel-arrows { display: flex; gap: 8px; }
+  .carousel-arrow {
+    width: 38px; height: 38px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+  }
+  .carousel-arrow:hover { background: var(--green-50); border-color: var(--green-900); }
+  .carousel-wrap { overflow: hidden; }
+  .carousel-track {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    cursor: grab;
+    padding-bottom: 4px;
+  }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-track.dragging { cursor: grabbing; scroll-behavior: auto; }
+  .carousel-track .product-card { min-width: 220px; flex-shrink: 0; }
+
+  /* ── SERVICES PREVIEW ── */
+  .services-preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .service-preview-card {
+    border-radius: var(--radius-md);
+    padding: 44px 36px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .service-preview-card:hover { transform: translateY(-3px); }
+  .service-preview-card.landscaping {
+    background: linear-gradient(135deg, var(--green-950) 0%, var(--green-900) 100%);
+  }
+  .service-preview-card.gifting {
+    background: linear-gradient(135deg, #4a2010 0%, var(--brown) 100%);
+  }
+  .svc-bg-icon {
+    position: absolute;
+    right: 24px; top: 24px;
+    font-size: 80px;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+  .service-preview-card h3 { font-size: 26px; margin-bottom: 10px; }
+  .service-preview-card p { opacity: 0.82; font-size: 14.5px; line-height: 1.65; margin-bottom: 20px; max-width: 320px; }
+  .svc-list { list-style: none; margin-bottom: 28px; }
+  .svc-list li { font-size: 13.5px; opacity: 0.88; padding: 3px 0; }
+  .svc-list li::before { content: '✓  '; font-weight: 700; opacity: 0.7; }
+
+  @media (max-width: 700px) { .services-preview-grid { grid-template-columns: 1fr; } }
+
+  /* ── WHY US ── */
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .why-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 32px 26px;
+    text-align: center;
+    transition: box-shadow 0.2s;
+  }
+  .why-card:hover { box-shadow: var(--shadow-hover); }
+  .why-icon { font-size: 44px; margin-bottom: 16px; }
+  .why-card h4 { font-size: 17px; font-weight: 700; margin-bottom: 8px; font-family: 'Inter', sans-serif; }
+  .why-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+  @media (max-width: 700px) { .why-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .why-grid { grid-template-columns: 1fr; } }
+</style>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-label">🌿 Hyderabad's favourite plant store</div>
+          <h1>Bring <em>nature</em> home, beautifully</h1>
+          <p class="hero-desc">
+            Handpicked indoor &amp; outdoor plants, planters, and landscaping services — delivered to your door in Hyderabad.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-lg" onclick="showPage('shop')">Shop Plants →</button>
+            <button class="btn btn-outline btn-lg" onclick="showPage('services')">Our Services</button>
+          </div>
+          <div class="hero-trust">
+            <div class="hero-trust-item"><div class="dot"></div>Hyderabad delivery</div>
+            <div class="hero-trust-item"><div class="dot"></div>100+ varieties</div>
+            <div class="hero-trust-item"><div class="dot"></div>⭐ 4.9 rating</div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-circle">🌿</div>
+          <div class="hero-stat hero-stat-1">
+            <span class="stat-num">500+</span>
+            <span class="stat-label">Happy Customers</span>
+          </div>
+          <div class="hero-stat hero-stat-2">
+            <span class="stat-num">100+</span>
+            <span class="stat-label">Plant Varieties</span>
+          </div>
+          <div class="hero-stat hero-stat-3">
+            <span class="stat-num">15 yrs</span>
+            <span class="stat-label">In Hyderabad</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="section section-alt">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px">
+        <div class="section-label">BROWSE BY TYPE</div>
+        <h2 class="section-title">What are you looking for?</h2>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-card" onclick="filterShop('Indoor')">
+          <div class="cat-icon">🪴</div>
+          <div class="cat-name">Indoor Plants</div>
+          <div class="cat-count">5 varieties</div>
+        </div>
+        <div class="cat-card" onclick="filterShop('Outdoor')">
+          <div class="cat-icon">🌺</div>
+          <div class="cat-name">Outdoor Plants</div>
+          <div class="cat-count">1 variety</div>
+        </div>
+        <div class="cat-card" onclick="filterShop('Balcony')">
+          <div class="cat-icon">🌱</div>
+          <div class="cat-name">Balcony Plants</div>
+          <div class="cat-count">2 varieties</div>
+        </div>
+        <div class="cat-card" onclick="filterShop('Lucky Plants')">
+          <div class="cat-icon">🎋</div>
+          <div class="cat-name">Lucky Plants</div>
+          <div class="cat-count">2 varieties</div>
+        </div>
+        <div class="cat-card" onclick="filterShop('Planters')">
+          <div class="cat-icon">🏺</div>
+          <div class="cat-name">Planters</div>
+          <div class="cat-count">1 variety</div>
+        </div>
+        <div class="cat-card" onclick="filterShop('Plant Care')">
+          <div class="cat-icon">🌰</div>
+          <div class="cat-name">Plant Care</div>
+          <div class="cat-count">2 products</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEST SELLERS CAROUSEL -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header-row">
+        <div class="header-left">
+          <div class="section-label">POPULAR PICKS</div>
+          <h2 class="section-title">Best Sellers</h2>
+          <p class="section-sub">Our most loved plants, chosen by Hyderabad homes.</p>
+        </div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" onclick="scrollCarousel('best-sellers-track', -1)">←</button>
+          <button class="carousel-arrow" onclick="scrollCarousel('best-sellers-track', 1)">→</button>
+        </div>
+      </div>
+      <div class="carousel-wrap">
+        <div class="carousel-track" id="best-sellers-track">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW ARRIVALS CAROUSEL -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header-row">
+        <div class="header-left">
+          <div class="section-label">FRESH STOCK</div>
+          <h2 class="section-title">New Arrivals</h2>
+          <p class="section-sub">Just landed at our nursery — be the first to bring them home.</p>
+        </div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" onclick="scrollCarousel('new-arrivals-track', -1)">←</button>
+          <button class="carousel-arrow" onclick="scrollCarousel('new-arrivals-track', 1)">→</button>
+        </div>
+      </div>
+      <div class="carousel-wrap">
+        <div class="carousel-track" id="new-arrivals-track">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px">
+        <div class="section-label">BEYOND PLANTS</div>
+        <h2 class="section-title">Full green solutions</h2>
+        <p class="section-sub" style="margin:0 auto">From your balcony to a corporate campus — we do it all.</p>
+      </div>
+      <div class="services-preview-grid">
+        <div class="service-preview-card landscaping" onclick="showPage('services')">
+          <div class="svc-bg-icon">🏡</div>
+          <h3>Landscaping Services</h3>
+          <p>Professional garden design and setup for homes, offices, and communities across Hyderabad.</p>
+          <ul class="svc-list">
+            <li>Villas &amp; Independent Houses</li>
+            <li>Apartments &amp; Gated Communities</li>
+            <li>Offices &amp; Commercial Spaces</li>
+            <li>Farm Houses</li>
+          </ul>
+          <button class="btn btn-white btn-sm">Get a Quote →</button>
+        </div>
+        <div class="service-preview-card gifting" onclick="showPage('gifting')">
+          <div class="svc-bg-icon">🎁</div>
+          <h3>Plant Gifting</h3>
+          <p>Thoughtful, green gifts for corporate clients, weddings, housewarmings, and festive occasions.</p>
+          <ul class="svc-list">
+            <li>Corporate Gifting (bulk orders)</li>
+            <li>Wedding &amp; Housewarming</li>
+            <li>Festive Hampers</li>
+            <li>Custom Branded Packaging</li>
+          </ul>
+          <button class="btn btn-sm" style="background:rgba(255,255,255,0.2);color:#fff;border:2px solid rgba(255,255,255,0.4)">Enquire Now →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="section section-alt">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px">
+        <div class="section-label">WHY SRIDEVI</div>
+        <h2 class="section-title">Grown with care, delivered with love</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">🌱</div>
+          <h4>Locally Grown</h4>
+          <p>All plants are nursery-grown in Hyderabad. No cold-chain stress, no wilting on arrival.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🧑‍🌾</div>
+          <h4>Expert Care Advice</h4>
+          <p>Our team has 15+ years of plant knowledge. Every order comes with care instructions.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🚚</div>
+          <h4>Same-Day Dispatch</h4>
+          <p>Order before 12 PM, get your plants dispatched the same day within Hyderabad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== 04-shop.html ===== -->
+<style>
+  /* ── SHOP PAGE ── */
+  .shop-header-bar {
+    background: var(--surface);
+    border-bottom: 1.5px solid var(--border);
+    padding: 20px 0;
+  }
+  .shop-header-bar .container { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .shop-title { font-size: 22px; font-weight: 700; font-family: 'Inter', sans-serif; margin-right: auto; }
+  .shop-result-count { font-size: 13px; color: var(--muted); white-space: nowrap; }
+  .shop-sort {
+    padding: 9px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    background: var(--surface);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .shop-sort:focus { border-color: var(--green-900); }
+
+  /* Category filter pills */
+  .shop-filter-bar {
+    background: var(--surface);
+    border-bottom: 1.5px solid var(--border);
+    padding: 14px 0;
+    position: sticky;
+    top: var(--nav-h);
+    z-index: 100;
+  }
+  .filter-pills { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px 4px; }
+  .filter-pills::-webkit-scrollbar { display: none; }
+  .filter-pill {
+    padding: 7px 18px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-2);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    flex-shrink: 0;
+  }
+  .filter-pill:hover { background: var(--green-50); border-color: var(--green-100); color: var(--green-900); }
+  .filter-pill.active { background: var(--green-900); border-color: var(--green-900); color: #fff; }
+
+  /* Product grid */
+  .shop-grid-wrap { padding: 36px 0 80px; }
+  .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+  .no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+  }
+  .no-results .icon { font-size: 52px; margin-bottom: 14px; }
+  .no-results p { font-size: 15px; margin-bottom: 20px; }
+
+  @media (max-width: 900px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 380px) { .product-grid { grid-template-columns: 1fr; } }
+</style>
+
+<!-- SHOP PAGE -->
+<div class="page" id="page-shop">
+
+  <div class="shop-header-bar">
+    <div class="container">
+      <h1 class="shop-title">Plants &amp; More</h1>
+      <span class="shop-result-count" id="shop-count">Showing 12 products</span>
+      <select class="shop-sort" id="shop-sort" onchange="applyShopFilters()">
+        <option value="featured">Featured</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="new">New Arrivals</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="shop-filter-bar">
+    <div class="container">
+      <div class="filter-pills" id="filter-pills">
+        <button class="filter-pill active" onclick="setShopFilter('All', this)">All</button>
+        <button class="filter-pill" onclick="setShopFilter('Indoor', this)">🪴 Indoor</button>
+        <button class="filter-pill" onclick="setShopFilter('Outdoor', this)">🌺 Outdoor</button>
+        <button class="filter-pill" onclick="setShopFilter('Balcony', this)">🌱 Balcony</button>
+        <button class="filter-pill" onclick="setShopFilter('Lucky Plants', this)">🎋 Lucky Plants</button>
+        <button class="filter-pill" onclick="setShopFilter('Planters', this)">🏺 Planters</button>
+        <button class="filter-pill" onclick="setShopFilter('Plant Care', this)">🌰 Plant Care</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="shop-grid-wrap">
+    <div class="container">
+      <div class="product-grid" id="shop-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== 05-services.html ===== -->
+<style>
+  .svc-hero {
+    background: linear-gradient(135deg, var(--green-950) 0%, var(--green-900) 100%);
+    color: white;
+    padding: 64px 0;
+    text-align: center;
+  }
+  .svc-hero .section-label { color: var(--green-400); }
+  .svc-hero h1 { color: white; margin-bottom: 14px; }
+  .svc-hero p { opacity: 0.82; font-size: 16px; max-width: 500px; margin: 0 auto; }
+
+  .property-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .property-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .property-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+  .property-img {
+    height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 58px;
+  }
+  .property-img.villa    { background: linear-gradient(135deg, #D0EDDB, #B3DFCA); }
+  .property-img.apt      { background: linear-gradient(135deg, #DBEAFE, #BFDBFE); }
+  .property-img.office   { background: linear-gradient(135deg, #EDE9FE, #DDD6FE); }
+  .property-img.gated    { background: linear-gradient(135deg, #FEF3C7, #FDE68A); }
+  .property-img.farm     { background: linear-gradient(135deg, #FCE7F3, #FBCFE8); }
+  .property-img.indep    { background: linear-gradient(135deg, #FFEDD5, #FED7AA); }
+  .property-body { padding: 16px; }
+  .property-body h4 { font-weight: 700; font-size: 15px; margin-bottom: 5px; font-family: 'Inter', sans-serif; }
+  .property-body p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  .showcase-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .showcase-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 26px 20px;
+    text-align: center;
+    transition: box-shadow 0.2s;
+  }
+  .showcase-card:hover { box-shadow: var(--shadow-hover); }
+  .showcase-icon { font-size: 42px; margin-bottom: 12px; }
+  .showcase-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; font-family: 'Inter', sans-serif; }
+  .showcase-card p { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+  @media (max-width: 900px) {
+    .property-grid { grid-template-columns: repeat(2, 1fr); }
+    .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .property-grid { grid-template-columns: 1fr; }
+    .showcase-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<!-- SERVICES PAGE -->
+<div class="page" id="page-services">
+
+  <div class="svc-hero">
+    <div class="container">
+      <div class="section-label">LANDSCAPING</div>
+      <h1>Professional Landscaping<br>for Every Space</h1>
+      <p>From cozy balconies to sprawling farm houses — we design, install, and maintain green spaces across Hyderabad.</p>
+    </div>
+  </div>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px">
+        <div class="section-label">WE WORK WITH</div>
+        <h2 class="section-title">Any property type</h2>
+        <p class="section-sub" style="margin:0 auto">Residential, commercial, or agricultural — our team handles all scales.</p>
+      </div>
+      <div class="property-grid">
+        <div class="property-card">
+          <div class="property-img villa">🏡</div>
+          <div class="property-body">
+            <h4>Villa</h4>
+            <p>Garden design, lawn care, water features, and seasonal planting for private villas.</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <div class="property-img apt">🏢</div>
+          <div class="property-body">
+            <h4>Apartment</h4>
+            <p>Balcony gardens, terrace setups, and common area greening for apartment complexes.</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <div class="property-img office">🏬</div>
+          <div class="property-body">
+            <h4>Office</h4>
+            <p>Indoor plant arrangements, desk plants, vertical gardens, and lobby installations.</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <div class="property-img gated">🏘️</div>
+          <div class="property-body">
+            <h4>Gated Community</h4>
+            <p>Large-scale landscaping for gated communities including parks, walking trails, and entrance gardens.</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <div class="property-img farm">🌾</div>
+          <div class="property-body">
+            <h4>Farm House</h4>
+            <p>Organic kitchen gardens, orchards, and natural landscaping for farm properties.</p>
+          </div>
+        </div>
+        <div class="property-card">
+          <div class="property-img indep">🏠</div>
+          <div class="property-body">
+            <h4>Independent House</h4>
+            <p>Front yard, backyard, and courtyard design for standalone residential properties.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px">
+        <div class="section-label">OUR SPECIALITY</div>
+        <h2 class="section-title">Signature Services</h2>
+      </div>
+      <div class="showcase-grid">
+        <div class="showcase-card">
+          <div class="showcase-icon">🧱</div>
+          <h4>Vertical Garden</h4>
+          <p>Living green walls for interiors and exteriors. Transform any blank wall into a statement.</p>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-icon">🌿</div>
+          <h4>New Balcony Setup</h4>
+          <p>Complete balcony transformation — planters, climbers, seating, and lighting.</p>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-icon">✂️</div>
+          <h4>Garden Maintenance</h4>
+          <p>Ongoing care plans: pruning, fertilising, pest control, and seasonal replanting.</p>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-icon">🏢</div>
+          <h4>Office Plants Setup</h4>
+          <p>Curated plant arrangements for desks, reception areas, meeting rooms, and atriums.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div style="max-width:600px;margin:0 auto">
+        <div style="text-align:center;margin-bottom:32px">
+          <div class="section-label">GET IN TOUCH</div>
+          <h2 class="section-title">Request a Landscaping Quote</h2>
+          <p class="section-sub" style="margin:0 auto">Tell us about your space and we'll reach out within 24 hours.</p>
+        </div>
+        <div id="svc-form-wrap">
+          <form onsubmit="submitInquiry(event,'svc')">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name *</label>
+                <input type="text" placeholder="e.g. Ramesh Kumar" required>
+              </div>
+              <div class="form-group">
+                <label>Phone Number *</label>
+                <input type="tel" placeholder="+91 98765 43210" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Property Type *</label>
+              <select required>
+                <option value="">Select property type</option>
+                <option>Villa</option>
+                <option>Apartment</option>
+                <option>Office</option>
+                <option>Gated Community</option>
+                <option>Farm House</option>
+                <option>Independent House</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tell us about your project</label>
+              <textarea placeholder="Describe your space, what you're looking for, any specific requirements..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full btn-lg">Send Inquiry →</button>
+          </form>
+        </div>
+        <div class="form-success" id="svc-success">
+          <div class="success-icon">✅</div>
+          <h4>Inquiry Received!</h4>
+          <p>Thank you! We'll review your requirements and call you within 24 hours to discuss your project.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== 06-gifting.html ===== -->
+<style>
+  .gift-hero {
+    background: linear-gradient(135deg, #3a1808 0%, var(--brown) 100%);
+    color: white;
+    padding: 64px 0;
+    text-align: center;
+  }
+  .gift-hero .section-label { color: #F6C89A; }
+  .gift-hero h1 { color: white; margin-bottom: 14px; }
+  .gift-hero p { opacity: 0.82; font-size: 16px; max-width: 500px; margin: 0 auto; }
+
+  .gifting-types { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 0; }
+  .gifting-type-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 40px 32px;
+    text-align: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .gifting-type-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+  .gifting-type-card .gift-icon { font-size: 52px; margin-bottom: 16px; }
+  .gifting-type-card h3 { font-size: 22px; margin-bottom: 10px; }
+  .gifting-type-card > p { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
+  .gift-features { list-style: none; text-align: left; margin-bottom: 24px; }
+  .gift-features li { font-size: 13.5px; color: var(--text-2); padding: 4px 0; }
+  .gift-features li::before { content: '🌿 '; }
+
+  .gift-showcase { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .gift-showcase-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 22px 16px;
+    text-align: center;
+    transition: box-shadow 0.2s;
+  }
+  .gift-showcase-card:hover { box-shadow: var(--shadow-hover); }
+  .gift-showcase-card .icon { font-size: 38px; margin-bottom: 10px; }
+  .gift-showcase-card h5 { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-family: 'Inter', sans-serif; }
+  .gift-showcase-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  @media (max-width: 700px) {
+    .gifting-types { grid-template-columns: 1fr; }
+    .gift-showcase { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<!-- GIFTING PAGE -->
+<div class="page" id="page-gifting">
+
+  <div class="gift-hero">
+    <div class="container">
+      <div class="section-label">PLANT GIFTING</div>
+      <h1>Corporate &amp; Event<br>Plant Gifting</h1>
+      <p>Thoughtful, green gifts that leave a lasting impression — for every occasion and every scale.</p>
+    </div>
+  </div>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px">
+        <div class="section-label">GIFTING TYPES</div>
+        <h2 class="section-title">Choose your occasion</h2>
+      </div>
+      <div class="gifting-types">
+        <div class="gifting-type-card">
+          <div class="gift-icon">🏢</div>
+          <h3>Corporate Gifting</h3>
+          <p>Strengthen business relationships with beautiful, branded plant gifts for clients, employees, and events.</p>
+          <ul class="gift-features">
+            <li>Bulk orders (minimum 10 units)</li>
+            <li>Custom branded packaging</li>
+            <li>GST invoice available</li>
+            <li>Desk plants &amp; premium arrangements</li>
+            <li>Pan-Hyderabad delivery</li>
+          </ul>
+          <button class="btn btn-primary btn-sm" onclick="document.getElementById('gift-form-wrap').scrollIntoView({behavior:'smooth'})">Get Bulk Quote →</button>
+        </div>
+        <div class="gifting-type-card">
+          <div class="gift-icon">🌸</div>
+          <h3>Functions &amp; Events</h3>
+          <p>Make weddings, housewarmings, pooja ceremonies, and celebrations memorable with our plant gift collections.</p>
+          <ul class="gift-features">
+            <li>Wedding favours &amp; return gifts</li>
+            <li>Housewarming gift sets</li>
+            <li>Festive &amp; pooja hampers</li>
+            <li>Gift wrapping included</li>
+            <li>Same-day dispatch available</li>
+          </ul>
+          <button class="btn btn-outline btn-sm" onclick="document.getElementById('gift-form-wrap').scrollIntoView({behavior:'smooth'})">Plan Your Order →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:36px">
+        <div class="section-label">GIFT IDEAS</div>
+        <h2 class="section-title">Popular choices</h2>
+      </div>
+      <div class="gift-showcase">
+        <div class="gift-showcase-card">
+          <div class="icon">🌿</div>
+          <h5>Office Desk Plants</h5>
+          <p>Low-maintenance plants perfect for desks and workspaces.</p>
+        </div>
+        <div class="gift-showcase-card">
+          <div class="icon">💒</div>
+          <h5>Wedding Favours</h5>
+          <p>Miniature potted plants with personalised tags for guests.</p>
+        </div>
+        <div class="gift-showcase-card">
+          <div class="icon">🏠</div>
+          <h5>Housewarming Sets</h5>
+          <p>Curated sets with lucky plants, planters, and care kits.</p>
+        </div>
+        <div class="gift-showcase-card">
+          <div class="icon">🎑</div>
+          <h5>Festive Hampers</h5>
+          <p>Diwali, Ugadi, and seasonal plant hampers with artisanal packaging.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div style="max-width:600px;margin:0 auto">
+        <div style="text-align:center;margin-bottom:32px">
+          <div class="section-label">ENQUIRE NOW</div>
+          <h2 class="section-title">Tell us about your order</h2>
+          <p class="section-sub" style="margin:0 auto">We'll get back to you within a few hours with availability and pricing.</p>
+        </div>
+        <div id="gift-form-wrap">
+          <form onsubmit="submitInquiry(event,'gift')">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name *</label>
+                <input type="text" placeholder="e.g. Priya Sharma" required>
+              </div>
+              <div class="form-group">
+                <label>Phone Number *</label>
+                <input type="tel" placeholder="+91 98765 43210" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Occasion Type *</label>
+                <select required>
+                  <option value="">Select occasion</option>
+                  <option>Corporate / Office</option>
+                  <option>Wedding</option>
+                  <option>Housewarming</option>
+                  <option>Festival / Pooja</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Expected Quantity</label>
+                <input type="number" placeholder="e.g. 25 units" min="1">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Additional Details</label>
+              <textarea placeholder="Budget per unit, preferred plants, delivery date, special packaging requests..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-brown btn-full btn-lg">Send Inquiry →</button>
+          </form>
+        </div>
+        <div class="form-success" id="gift-success">
+          <div class="success-icon">🎁</div>
+          <h4>Inquiry Received!</h4>
+          <p>Lovely! We'll review your gifting requirements and reach out within a few hours with options and pricing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== 07-about.html ===== -->
+<style>
+  .about-hero {
+    background: var(--surface);
+    border-bottom: 1.5px solid var(--border);
+    padding: 64px 0 48px;
+    text-align: center;
+  }
+  .about-hero h1 { margin-bottom: 14px; }
+  .about-hero p { font-size: 17px; color: var(--text-2); max-width: 540px; margin: 0 auto; line-height: 1.7; }
+
+  .about-story-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 60px; align-items: start; }
+  .about-story p { font-size: 15.5px; color: var(--text-2); line-height: 1.8; margin-bottom: 18px; }
+  .about-pillars { display: flex; flex-direction: column; gap: 16px; }
+  .about-pillar {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px 22px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: box-shadow 0.2s;
+  }
+  .about-pillar:hover { box-shadow: var(--shadow-hover); }
+  .pillar-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+  .pillar-text h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; font-family: 'Inter', sans-serif; }
+  .pillar-text p { font-size: 13px; color: var(--muted); line-height: 1.55; margin: 0; }
+
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .contact-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 28px 24px;
+    text-align: center;
+    transition: box-shadow 0.2s;
+  }
+  .contact-card:hover { box-shadow: var(--shadow-hover); }
+  .contact-card .c-icon { font-size: 36px; margin-bottom: 12px; }
+  .contact-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; font-family: 'Inter', sans-serif; }
+  .contact-card p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+  .contact-card a { color: var(--green-900); font-weight: 600; }
+
+  @media (max-width: 768px) {
+    .about-story-grid { grid-template-columns: 1fr; gap: 36px; }
+    .contact-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  }
+</style>
+
+<!-- ABOUT PAGE -->
+<div class="page" id="page-about">
+
+  <div class="about-hero">
+    <div class="container">
+      <div class="section-label">OUR STORY</div>
+      <h1>Hyderabad's trusted<br><em class="serif" style="color:var(--green-400)">plant destination</em></h1>
+      <p>Family-run, locally grown, community-loved — we've been making Hyderabad greener since 2010.</p>
+    </div>
+  </div>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="about-story-grid">
+        <div class="about-story">
+          <div class="section-label">WHO WE ARE</div>
+          <h2 class="section-title" style="margin-bottom:24px">15 years of growing green in Hyderabad</h2>
+          <p>Sridevi Nursery began as a small corner garden store in Banjara Hills in 2010. What started with a handful of indoor plants and a lot of love for gardening has grown into Hyderabad's most trusted nursery for home gardeners, landscape architects, and corporate clients alike.</p>
+          <p>Every plant we sell is nurtured at our own nursery — no middlemen, no cold storage. We believe healthy plants come from healthy roots, and that starts with how we grow them right here in Hyderabad's climate.</p>
+          <p>Today, we serve 500+ happy customers across Hyderabad, offering 100+ plant varieties, professional landscaping services, and plant gifting solutions for every occasion.</p>
+        </div>
+        <div class="about-pillars">
+          <div class="about-pillar">
+            <div class="pillar-icon">🌱</div>
+            <div class="pillar-text">
+              <h4>Locally Grown</h4>
+              <p>Every plant is grown at our Banjara Hills nursery, adapted to Hyderabad's heat and humidity.</p>
+            </div>
+          </div>
+          <div class="about-pillar">
+            <div class="pillar-icon">🧑‍🌾</div>
+            <div class="pillar-text">
+              <h4>Expert Care Advice</h4>
+              <p>15+ years of horticultural experience. Our team guides every customer to the right plant.</p>
+            </div>
+          </div>
+          <div class="about-pillar">
+            <div class="pillar-icon">🚚</div>
+            <div class="pillar-text">
+              <h4>Doorstep Delivery</h4>
+              <p>Same-day dispatch across all Hyderabad areas for orders placed before noon.</p>
+            </div>
+          </div>
+          <div class="about-pillar">
+            <div class="pillar-icon">🤝</div>
+            <div class="pillar-text">
+              <h4>Community First</h4>
+              <p>We work with local communities, schools, and housing societies to build greener neighbourhoods.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px">
+        <div class="section-label">FIND US</div>
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-sub" style="margin:0 auto">We're open 6 days a week. Drop by or give us a call.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="c-icon">📍</div>
+          <h4>Our Nursery</h4>
+          <p>Banjara Hills Road No.12<br>Hyderabad, Telangana — 500034</p>
+        </div>
+        <div class="contact-card">
+          <div class="c-icon">📞</div>
+          <h4>Call / WhatsApp</h4>
+          <p><a href="tel:+919876543210">+91 98765 43210</a><br>Mon–Sat: 8 AM – 7 PM<br>Sun: 9 AM – 5 PM</p>
+        </div>
+        <div class="contact-card">
+          <div class="c-icon">💬</div>
+          <h4>WhatsApp Us</h4>
+          <p>Quick questions, order updates, or just say hello on WhatsApp.</p>
+          <a href="https://wa.me/919876543210" target="_blank" class="btn btn-outline btn-sm" style="margin-top:12px;display:inline-flex">Chat on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== 08-auth.html ===== -->
+<style>
+  /* ── AUTH ── */
+  .auth-page {
+    min-height: calc(100vh - var(--bar-h) - var(--nav-h) - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    background: var(--sand);
+  }
+  .auth-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px 36px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: var(--shadow-card);
+  }
+  .auth-logo { text-align: center; margin-bottom: 28px; }
+  .auth-logo .logo-icon { font-size: 36px; margin-bottom: 8px; }
+  .auth-logo h2 { font-size: 22px; margin-bottom: 4px; }
+  .auth-logo p { font-size: 13px; color: var(--muted); }
+
+  .auth-tabs { display: flex; background: var(--sand); border-radius: var(--radius); padding: 4px; margin-bottom: 28px; }
+  .auth-tab {
+    flex: 1;
+    padding: 9px;
+    border: none;
+    background: none;
+    border-radius: calc(var(--radius) - 2px);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .auth-tab.active { background: var(--surface); color: var(--green-900); box-shadow: var(--shadow-card); }
+
+  .auth-form { display: none; }
+  .auth-form.active { display: block; }
+
+  .auth-divider { text-align: center; font-size: 12px; color: var(--muted); margin: 16px 0; position: relative; }
+  .auth-divider::before, .auth-divider::after {
+    content: ''; position: absolute; top: 50%; width: 40%; height: 1px; background: var(--border);
+  }
+  .auth-divider::before { left: 0; }
+  .auth-divider::after { right: 0; }
+
+  .auth-hint {
+    background: var(--green-50);
+    border: 1.5px solid var(--green-100);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    font-size: 12px;
+    color: var(--text-2);
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+  .auth-hint strong { color: var(--green-900); }
+  .auth-error {
+    background: #FEE2E2;
+    border: 1.5px solid #FECACA;
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--error);
+    margin-bottom: 14px;
+    display: none;
+  }
+  .auth-error.show { display: block; }
+
+  /* ── MY ORDERS ── */
+  .orders-page { padding: 48px 0 80px; }
+  .orders-page-header { margin-bottom: 32px; }
+  .orders-page-header h2 { margin-bottom: 6px; }
+  .orders-page-header p { color: var(--muted); font-size: 14px; }
+  .orders-table-wrap {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .orders-table { width: 100%; border-collapse: collapse; }
+  .orders-table th {
+    text-align: left;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    padding: 14px 20px;
+    background: var(--sand);
+    border-bottom: 1.5px solid var(--border);
+  }
+  .orders-table td { padding: 16px 20px; font-size: 14px; border-bottom: 1.5px solid var(--border); }
+  .orders-table tr:last-child td { border-bottom: none; }
+  .orders-table tr:hover td { background: var(--sand); }
+  .order-num { font-weight: 700; color: var(--green-900); font-size: 13px; }
+  .order-items { font-size: 13px; color: var(--text-2); }
+  .order-total { font-weight: 700; }
+
+  @media (max-width: 600px) {
+    .auth-card { padding: 28px 20px; }
+    .orders-table th, .orders-table td { padding: 12px; font-size: 12px; }
+  }
+</style>
+
+<!-- LOGIN PAGE -->
+<div class="page" id="page-login">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="logo-icon">🌿</div>
+        <h2>Welcome back</h2>
+        <p>Sign in to your Sridevi Nursery account</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuthTab('login',this)">Login</button>
+        <button class="auth-tab" onclick="switchAuthTab('register',this)">Register</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div class="auth-form active" id="auth-login-form">
+        <div class="auth-error" id="login-error">Invalid username or password. Please try again.</div>
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="login-username" placeholder="Enter username" autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+        </div>
+        <button class="btn btn-primary btn-full" onclick="doLogin()" style="margin-top:4px">Sign In →</button>
+        <div class="auth-hint">
+          <strong>Demo accounts:</strong><br>
+          Admin → <strong>admin</strong> / <strong>admin123</strong><br>
+          Customer → <strong>customer</strong> / <strong>cust123</strong>
+        </div>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div class="auth-form" id="auth-register-form">
+        <div class="auth-error" id="register-error"></div>
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="reg-name" placeholder="e.g. Priya Sharma">
+        </div>
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" id="reg-email" placeholder="priya@example.com">
+        </div>
+        <div class="form-group">
+          <label>Password *</label>
+          <input type="password" id="reg-password" placeholder="Min. 6 characters">
+        </div>
+        <div class="form-group">
+          <label>Confirm Password *</label>
+          <input type="password" id="reg-confirm" placeholder="Repeat password">
+        </div>
+        <button class="btn btn-primary btn-full" onclick="doRegister()" style="margin-top:4px">Create Account →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MY ORDERS PAGE -->
+<div class="page" id="page-orders">
+  <div class="container">
+    <div class="orders-page">
+      <div class="orders-page-header">
+        <h2>My Orders</h2>
+        <p>Your order history with Sridevi Nursery</p>
+      </div>
+      <div class="orders-table-wrap">
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>Order #</th>
+              <th>Date</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="orders-tbody">
+            <tr>
+              <td><span class="order-num">SNL-2026-00003</span></td>
+              <td>12 Apr 2026</td>
+              <td class="order-items">Snake Plant × 1, Areca Palm × 1</td>
+              <td class="order-total">₹1,999</td>
+              <td><span class="badge badge-processing">Processing</span></td>
+            </tr>
+            <tr>
+              <td><span class="order-num">SNL-2026-00001</span></td>
+              <td>3 Apr 2026</td>
+              <td class="order-items">Lucky Bamboo × 3, Potting Mix × 2</td>
+              <td class="order-total">₹1,557</td>
+              <td><span class="badge badge-delivered">Delivered</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:28px;text-align:center">
+        <button class="btn btn-outline" onclick="showPage('shop')">← Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 09-checkout.html ===== -->
+<style>
+  /* ── CHECKOUT ── */
+  .checkout-wrap {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 32px;
+    padding: 48px 0 80px;
+    align-items: start;
+  }
+  .checkout-section {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .checkout-section:last-child { margin-bottom: 0; }
+  .checkout-section h3 {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .checkout-section h3 .step-num {
+    width: 24px; height: 24px;
+    background: var(--green-900);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Pincode feedback */
+  .pincode-feedback {
+    font-size: 12.5px;
+    font-weight: 600;
+    margin-top: 6px;
+    display: none;
+  }
+  .pincode-feedback.ok { color: var(--success); display: block; }
+  .pincode-feedback.err { color: var(--error); display: block; }
+
+  /* Payment options */
+  .payment-option {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .payment-option.selected { border-color: var(--green-900); background: var(--green-50); }
+  .payment-option.disabled { opacity: 0.5; cursor: not-allowed; }
+  .payment-radio {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border-2);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.15s;
+  }
+  .payment-option.selected .payment-radio { border-color: var(--green-900); }
+  .payment-radio-inner {
+    width: 9px; height: 9px;
+    background: var(--green-900);
+    border-radius: 50%;
+    display: none;
+  }
+  .payment-option.selected .payment-radio-inner { display: block; }
+  .payment-info { flex: 1; }
+  .payment-info .p-title { font-size: 14px; font-weight: 600; }
+  .payment-info .p-sub { font-size: 12px; color: var(--muted); }
+  .payment-icon { font-size: 26px; }
+
+  /* Min order warning */
+  .min-order-warn {
+    background: #FEF3C7;
+    border: 1.5px solid #FDE68A;
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #78350F;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .min-order-warn.show { display: block; }
+
+  /* Order summary sidebar */
+  .order-summary-sidebar { position: sticky; top: calc(var(--nav-h) + 20px); }
+  .summary-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .summary-card-head {
+    padding: 18px 20px;
+    border-bottom: 1.5px solid var(--border);
+    font-size: 15px;
+    font-weight: 700;
+    background: var(--sand);
+  }
+  .summary-items { padding: 16px 20px; border-bottom: 1.5px solid var(--border); max-height: 260px; overflow-y: auto; }
+  .summary-item { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .summary-item:last-child { margin-bottom: 0; }
+  .summary-item-emoji { font-size: 26px; width: 40px; height: 40px; background: var(--green-50); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .summary-item-info { flex: 1; min-width: 0; }
+  .summary-item-name { font-size: 13px; font-weight: 600; line-height: 1.3; }
+  .summary-item-qty { font-size: 12px; color: var(--muted); }
+  .summary-item-price { font-size: 13px; font-weight: 700; color: var(--green-900); white-space: nowrap; }
+  .summary-totals { padding: 16px 20px; }
+  .summary-row { display: flex; justify-content: space-between; font-size: 13.5px; color: var(--muted); margin-bottom: 8px; }
+  .summary-row.grand { font-size: 16px; font-weight: 700; color: var(--text); padding-top: 10px; margin-top: 4px; border-top: 1.5px solid var(--border); }
+  .summary-row.grand span:last-child { color: var(--green-900); }
+
+  @media (max-width: 800px) {
+    .checkout-wrap { grid-template-columns: 1fr; }
+    .order-summary-sidebar { position: static; }
+  }
+
+  /* ── ORDER SUCCESS ── */
+  .success-page {
+    min-height: calc(100vh - var(--bar-h) - var(--nav-h) - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+  }
+  .success-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    max-width: 540px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+  }
+  .success-circle {
+    width: 80px; height: 80px;
+    background: var(--green-50);
+    border: 2px solid var(--green-100);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 38px;
+    margin: 0 auto 24px;
+  }
+  .success-card h2 { font-size: 30px; margin-bottom: 10px; }
+  .success-card .sub { font-size: 15px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+  .order-num-badge {
+    display: inline-block;
+    background: var(--green-50);
+    border: 1.5px solid var(--green-100);
+    border-radius: var(--radius);
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--green-900);
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+  }
+  .next-steps { text-align: left; margin-bottom: 28px; }
+  .next-steps h4 { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 14px; font-family: 'Inter', sans-serif; }
+  .next-step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+  .step-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--green-50); border: 2px solid var(--green-100); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--green-900); flex-shrink: 0; margin-top: 1px; }
+  .step-info .step-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .step-info .step-desc { font-size: 12.5px; color: var(--muted); }
+  .success-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 480px) {
+    .success-card { padding: 32px 20px; }
+  }
+</style>
+
+<!-- CHECKOUT PAGE -->
+<div class="page" id="page-checkout">
+  <div class="container">
+    <div class="checkout-wrap">
+      <div class="checkout-left">
+
+        <!-- Address -->
+        <div class="checkout-section">
+          <h3><span class="step-num">1</span> Delivery Address</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" id="co-name" placeholder="Your full name">
+            </div>
+            <div class="form-group">
+              <label>Phone *</label>
+              <input type="tel" id="co-phone" placeholder="+91 XXXXX XXXXX">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Address Line *</label>
+            <input type="text" id="co-address" placeholder="House / Flat no, Street, Colony">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Area *</label>
+              <select id="co-area">
+                <option value="">Select area</option>
+                <option>Banjara Hills</option>
+                <option>Jubilee Hills</option>
+                <option>Hitech City</option>
+                <option>Gachibowli</option>
+                <option>Kondapur</option>
+                <option>Madhapur</option>
+                <option>Kukatpally</option>
+                <option>Begumpet</option>
+                <option>Secunderabad</option>
+                <option>Ameerpet</option>
+                <option>Dilsukhnagar</option>
+                <option>LB Nagar</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Pincode *</label>
+              <input type="text" id="co-pincode" placeholder="500034" maxlength="6" oninput="validatePincode(this.value)">
+              <div class="pincode-feedback" id="pincode-feedback"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Landmark <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+            <input type="text" id="co-landmark" placeholder="Near a landmark...">
+          </div>
+        </div>
+
+        <!-- Payment -->
+        <div class="checkout-section">
+          <h3><span class="step-num">2</span> Payment Method</h3>
+          <div class="payment-option selected" id="pay-cod">
+            <span class="payment-icon">💵</span>
+            <div class="payment-info">
+              <div class="p-title">Cash on Delivery</div>
+              <div class="p-sub">Pay when your order arrives. No extra charges.</div>
+            </div>
+            <div class="payment-radio"><div class="payment-radio-inner"></div></div>
+          </div>
+          <div class="payment-option disabled">
+            <span class="payment-icon">💳</span>
+            <div class="payment-info">
+              <div class="p-title">Razorpay <span class="badge badge-processing" style="font-size:10px;margin-left:6px">Coming Soon</span></div>
+              <div class="p-sub">UPI, Cards, Net Banking — available soon.</div>
+            </div>
+            <div class="payment-radio"></div>
+          </div>
+        </div>
+
+        <!-- Place order -->
+        <div class="min-order-warn" id="checkout-min-warn">
+          ⚠️ Min. order value is ₹1,999 to place an order. Add more items or <a href="#" onclick="showPage('shop')">browse the shop</a>.
+        </div>
+        <button class="btn btn-primary btn-full btn-lg" id="place-order-btn" onclick="placeOrder()">
+          Place Order — Cash on Delivery →
+        </button>
+        <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:10px">
+          By placing the order you agree to our <a href="#" style="color:var(--green-900);font-weight:600">Terms & Conditions</a>
+        </p>
+      </div>
+
+      <!-- Sticky order summary -->
+      <div class="order-summary-sidebar">
+        <div class="summary-card">
+          <div class="summary-card-head">Order Summary</div>
+          <div class="summary-items" id="checkout-items"></div>
+          <div class="summary-totals">
+            <div class="summary-row"><span>Subtotal</span><span id="co-subtotal">₹0</span></div>
+            <div class="summary-row"><span>Delivery</span><span id="co-delivery">Free</span></div>
+            <div class="summary-row grand"><span>Total</span><span id="co-total">₹0</span></div>
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-sm" style="margin-top:12px;width:100%" onclick="toggleCart()">← Edit Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ORDER SUCCESS PAGE -->
+<div class="page" id="page-success">
+  <div class="container">
+    <div class="success-page">
+      <div class="success-card">
+        <div class="success-circle">✅</div>
+        <h2>Order Placed!</h2>
+        <p class="sub">Thank you! We've received your order and will call to confirm shortly.</p>
+        <div class="order-num-badge" id="success-order-num">SNL-2026-00001</div>
+        <div class="next-steps">
+          <h4>What happens next</h4>
+          <div class="next-step">
+            <div class="step-dot">1</div>
+            <div class="step-info">
+              <div class="step-title">We'll call to confirm</div>
+              <div class="step-desc">Our team will call you within a few hours to confirm your order.</div>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="step-dot">2</div>
+            <div class="step-info">
+              <div class="step-title">Order packed</div>
+              <div class="step-desc">Plants are carefully packed at our nursery with care instructions.</div>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="step-dot">3</div>
+            <div class="step-info">
+              <div class="step-title">Out for delivery</div>
+              <div class="step-desc">Your order is dispatched across Hyderabad. Same-day for orders before 12 PM.</div>
+            </div>
+          </div>
+          <div class="next-step">
+            <div class="step-dot">4</div>
+            <div class="step-info">
+              <div class="step-title">Delivered — Pay on arrival</div>
+              <div class="step-desc">Pay cash when your plants arrive. Inspect before paying.</div>
+            </div>
+          </div>
+        </div>
+        <div class="success-actions">
+          <button class="btn btn-primary" onclick="showPage('shop')">Continue Shopping</button>
+          <a class="btn btn-outline" href="https://wa.me/919876543210" target="_blank">Track on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 10-admin.html ===== -->
+<style>
+  /* ── ADMIN ── */
+  .admin-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: calc(100vh - var(--bar-h) - var(--nav-h));
+  }
+  .admin-sidebar {
+    background: var(--green-950);
+    padding: 24px 0;
+    position: sticky;
+    top: var(--nav-h);
+    height: calc(100vh - var(--bar-h) - var(--nav-h));
+    overflow-y: auto;
+  }
+  .admin-sidebar-head {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 12px;
+  }
+  .admin-sidebar-head .title { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 2px; }
+  .admin-sidebar-head .name { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.88); }
+  .admin-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 20px;
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+  .admin-nav-item:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.9); }
+  .admin-nav-item.active { background: rgba(255,255,255,0.12); color: #fff; border-right: 3px solid var(--green-400); }
+  .admin-nav-item .a-icon { font-size: 16px; }
+
+  .admin-content { background: var(--sand); padding: 32px; overflow-y: auto; }
+  .admin-content-header { margin-bottom: 28px; }
+  .admin-content-header h2 { font-size: 24px; margin-bottom: 4px; }
+  .admin-content-header p { color: var(--muted); font-size: 14px; }
+
+  /* Stats */
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 28px; }
+  .stat-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 22px 20px;
+    border-left: 4px solid transparent;
+    transition: box-shadow 0.2s;
+  }
+  .stat-card:hover { box-shadow: var(--shadow-hover); }
+  .stat-card.green { border-left-color: var(--green-400); }
+  .stat-card.blue { border-left-color: #3B82F6; }
+  .stat-card.orange { border-left-color: #F59E0B; }
+  .stat-card.purple { border-left-color: #8B5CF6; }
+  .stat-label { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .stat-value { font-size: 30px; font-weight: 800; color: var(--text); margin-bottom: 4px; font-family: 'Inter', sans-serif; }
+  .stat-change { font-size: 12.5px; color: var(--success); font-weight: 600; }
+  .stat-change.neg { color: var(--error); }
+
+  /* Admin table */
+  .admin-table-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .admin-table-head {
+    padding: 18px 22px;
+    border-bottom: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .admin-table-head h3 { font-size: 15px; font-weight: 700; font-family: 'Inter', sans-serif; }
+  .admin-search {
+    display: flex;
+    align-items: center;
+    background: var(--sand);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    flex: 1;
+    max-width: 280px;
+  }
+  .admin-search input { flex: 1; padding: 8px 12px; border: none; background: none; font-size: 13px; color: var(--text); outline: none; }
+  .admin-search-icon { padding: 0 12px; color: var(--muted); font-size: 14px; }
+  .admin-table { width: 100%; border-collapse: collapse; }
+  .admin-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    padding: 12px 18px;
+    background: var(--sand);
+    border-bottom: 1.5px solid var(--border);
+    white-space: nowrap;
+  }
+  .admin-table td { padding: 13px 18px; font-size: 13.5px; border-bottom: 1.5px solid var(--border); vertical-align: middle; }
+  .admin-table tr:last-child td { border-bottom: none; }
+  .admin-table tr:hover td { background: var(--sand); }
+
+  /* Action buttons */
+  .action-btn {
+    background: var(--green-50);
+    color: var(--green-900);
+    border: 1.5px solid var(--green-100);
+    border-radius: var(--radius-sm);
+    padding: 5px 11px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: background 0.15s;
+    font-family: 'Inter', sans-serif;
+  }
+  .action-btn:hover { background: var(--green-100); }
+  .action-btn.danger { background: #FEE2E2; color: var(--error); border-color: #FECACA; }
+  .action-btn.danger:hover { background: #FECACA; }
+
+  .status-select {
+    padding: 5px 10px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 12.5px;
+    cursor: pointer;
+    background: white;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+  }
+
+  /* Admin tabs */
+  .admin-tab-panel { display: none; }
+  .admin-tab-panel.active { display: block; }
+
+  /* Status filter pills for orders */
+  .status-filter-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .status-filter-btn {
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .status-filter-btn.active { background: var(--green-900); border-color: var(--green-900); color: #fff; }
+
+  /* Categories */
+  .cat-list { display: flex; flex-direction: column; gap: 10px; }
+  .cat-row {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cat-row-name { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+  .cat-row-count { font-size: 12px; color: var(--muted); }
+  .add-cat-row { display: flex; gap: 10px; margin-top: 14px; }
+  .add-cat-row input { flex: 1; }
+
+  @media (max-width: 768px) {
+    .admin-layout { grid-template-columns: 1fr; }
+    .admin-sidebar { position: static; height: auto; display: flex; overflow-x: auto; padding: 8px 0; gap: 0; }
+    .admin-sidebar-head { display: none; }
+    .admin-nav-item { padding: 10px 14px; white-space: nowrap; flex-shrink: 0; border-right: none !important; }
+    .admin-nav-item.active { border-bottom: 3px solid var(--green-400); }
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 480px) {
+    .admin-content { padding: 20px 16px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<!-- ADMIN PAGE -->
+<div class="page" id="page-admin">
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+      <div class="admin-sidebar-head">
+        <div class="title">Admin Panel</div>
+        <div class="name" id="admin-sidebar-name">Admin</div>
+      </div>
+      <button class="admin-nav-item active" onclick="switchAdminTab('dashboard',this)"><span class="a-icon">📊</span> Dashboard</button>
+      <button class="admin-nav-item" onclick="switchAdminTab('products',this)"><span class="a-icon">🌿</span> Products</button>
+      <button class="admin-nav-item" onclick="switchAdminTab('orders',this)"><span class="a-icon">📦</span> Orders</button>
+      <button class="admin-nav-item" onclick="switchAdminTab('inquiries',this)"><span class="a-icon">📋</span> Inquiries</button>
+      <button class="admin-nav-item" onclick="switchAdminTab('categories',this)"><span class="a-icon">🏷️</span> Categories</button>
+      <button class="admin-nav-item" onclick="showPage('home')" style="margin-top:24px;border-top:1px solid rgba(255,255,255,0.08);padding-top:20px"><span class="a-icon">↩</span> Back to Site</button>
+    </div>
+
+    <!-- Content -->
+    <div class="admin-content">
+
+      <!-- DASHBOARD -->
+      <div class="admin-tab-panel active" id="admin-tab-dashboard">
+        <div class="admin-content-header">
+          <h2>Dashboard</h2>
+          <p>Overview of your store</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card green">
+            <div class="stat-label">Total Orders</div>
+            <div class="stat-value">24</div>
+            <div class="stat-change">↑ 4 this week</div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-label">Revenue</div>
+            <div class="stat-value">₹52,400</div>
+            <div class="stat-change">↑ 12% vs last month</div>
+          </div>
+          <div class="stat-card orange">
+            <div class="stat-label">Active Products</div>
+            <div class="stat-value">12</div>
+            <div class="stat-change neg">2 out of stock</div>
+          </div>
+          <div class="stat-card purple">
+            <div class="stat-label">Pending Inquiries</div>
+            <div class="stat-value">6</div>
+            <div class="stat-change">3 landscaping · 3 gifting</div>
+          </div>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-head">
+            <h3>Recent Orders</h3>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order #</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>SNL-2026-00005</strong></td><td>Arun K.</td><td>2 items</td><td>₹2,340</td><td><span class="badge badge-pending">Pending</span></td><td><button class="action-btn">View</button></td></tr>
+              <tr><td><strong>SNL-2026-00004</strong></td><td>Meena S.</td><td>3 items</td><td>₹3,150</td><td><span class="badge badge-processing">Processing</span></td><td><button class="action-btn">View</button></td></tr>
+              <tr><td><strong>SNL-2026-00003</strong></td><td>Priya R.</td><td>2 items</td><td>₹1,999</td><td><span class="badge badge-processing">Processing</span></td><td><button class="action-btn">View</button></td></tr>
+              <tr><td><strong>SNL-2026-00002</strong></td><td>Rajesh M.</td><td>4 items</td><td>₹4,200</td><td><span class="badge badge-delivered">Delivered</span></td><td><button class="action-btn">View</button></td></tr>
+              <tr><td><strong>SNL-2026-00001</strong></td><td>Priya R.</td><td>5 items</td><td>₹1,557</td><td><span class="badge badge-delivered">Delivered</span></td><td><button class="action-btn">View</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div class="admin-tab-panel" id="admin-tab-products">
+        <div class="admin-content-header">
+          <h2>Products</h2>
+          <p>Manage your plant and product catalog</p>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-head">
+            <h3>All Products</h3>
+            <div class="admin-search">
+              <span class="admin-search-icon">🔍</span>
+              <input type="text" placeholder="Search products..." oninput="filterAdminProducts(this.value)">
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="toggleAddProductForm()">+ Add Product</button>
+          </div>
+
+          <!-- Add product form (hidden by default) -->
+          <div id="add-product-form" style="display:none;padding:20px;border-bottom:1.5px solid var(--border);background:var(--green-50)">
+            <div style="font-weight:700;font-size:14px;margin-bottom:16px">Add New Product</div>
+            <div class="form-row">
+              <div class="form-group"><label>Product Name</label><input type="text" id="new-prod-name" placeholder="e.g. Money Plant"></div>
+              <div class="form-group"><label>Category</label>
+                <select id="new-prod-cat">
+                  <option>Indoor</option><option>Outdoor</option><option>Balcony</option>
+                  <option>Lucky Plants</option><option>Planters</option><option>Plant Care</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Price (₹)</label><input type="number" id="new-prod-price" placeholder="399"></div>
+              <div class="form-group"><label>Stock</label><input type="number" id="new-prod-stock" placeholder="10"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Emoji</label><input type="text" id="new-prod-emoji" placeholder="🌿" maxlength="4"></div>
+              <div class="form-group" style="display:flex;align-items:flex-end;gap:10px">
+                <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;margin-bottom:0">
+                  <input type="checkbox" id="new-prod-best"> Best Seller
+                </label>
+                <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;margin-bottom:0">
+                  <input type="checkbox" id="new-prod-new"> New Arrival
+                </label>
+              </div>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:4px">
+              <button class="btn btn-primary btn-sm" onclick="addProductFromAdmin()">Save Product</button>
+              <button class="btn btn-ghost btn-sm" onclick="toggleAddProductForm()">Cancel</button>
+            </div>
+          </div>
+
+          <table class="admin-table" id="admin-products-table">
+            <thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Tags</th><th>Actions</th></tr></thead>
+            <tbody id="admin-products-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ORDERS -->
+      <div class="admin-tab-panel" id="admin-tab-orders">
+        <div class="admin-content-header">
+          <h2>Orders</h2>
+          <p>Manage and update customer orders</p>
+        </div>
+        <div class="status-filter-bar">
+          <button class="status-filter-btn active" onclick="filterAdminOrders('All',this)">All</button>
+          <button class="status-filter-btn" onclick="filterAdminOrders('Pending',this)">Pending</button>
+          <button class="status-filter-btn" onclick="filterAdminOrders('Processing',this)">Processing</button>
+          <button class="status-filter-btn" onclick="filterAdminOrders('Delivered',this)">Delivered</button>
+          <button class="status-filter-btn" onclick="filterAdminOrders('Cancelled',this)">Cancelled</button>
+        </div>
+        <div class="admin-table-card">
+          <table class="admin-table">
+            <thead><tr><th>Order #</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th>Update</th></tr></thead>
+            <tbody id="admin-orders-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- INQUIRIES -->
+      <div class="admin-tab-panel" id="admin-tab-inquiries">
+        <div class="admin-content-header">
+          <h2>Inquiries</h2>
+          <p>Landscaping and gifting inquiries from customers</p>
+        </div>
+        <div class="admin-table-card">
+          <table class="admin-table">
+            <thead><tr><th>Name</th><th>Phone</th><th>Type</th><th>Details</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody id="admin-inquiries-tbody">
+              <tr><td>Ravi Kumar</td><td>+91 98001 12345</td><td><span class="badge badge-new">Landscaping</span></td><td>Villa, Banjara Hills</td><td>14 Apr</td><td><span class="badge badge-pending">New</span></td><td><button class="action-btn">Resolve</button></td></tr>
+              <tr><td>Sunita Rao</td><td>+91 99887 65432</td><td><span class="badge badge-processing">Gifting</span></td><td>Corporate, 50 units</td><td>13 Apr</td><td><span class="badge badge-pending">New</span></td><td><button class="action-btn">Resolve</button></td></tr>
+              <tr><td>Deepak M.</td><td>+91 97654 32109</td><td><span class="badge badge-new">Landscaping</span></td><td>Office, Hitech City</td><td>12 Apr</td><td><span class="badge badge-processing">In Progress</span></td><td><button class="action-btn">Resolve</button></td></tr>
+              <tr><td>Ananya S.</td><td>+91 90000 11223</td><td><span class="badge badge-processing">Gifting</span></td><td>Wedding, 100 units</td><td>11 Apr</td><td><span class="badge badge-delivered">Resolved</span></td><td><button class="action-btn danger">Archive</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- CATEGORIES -->
+      <div class="admin-tab-panel" id="admin-tab-categories">
+        <div class="admin-content-header">
+          <h2>Categories</h2>
+          <p>Manage product categories</p>
+        </div>
+        <div class="admin-table-card" style="padding:24px">
+          <div class="cat-list" id="admin-cat-list">
+            <div class="cat-row"><div class="cat-row-name">🪴 Indoor</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">5 products</span><button class="action-btn danger">Delete</button></div></div>
+            <div class="cat-row"><div class="cat-row-name">🌺 Outdoor</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">1 product</span><button class="action-btn danger">Delete</button></div></div>
+            <div class="cat-row"><div class="cat-row-name">🌱 Balcony</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">2 products</span><button class="action-btn danger">Delete</button></div></div>
+            <div class="cat-row"><div class="cat-row-name">🎋 Lucky Plants</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">2 products</span><button class="action-btn danger">Delete</button></div></div>
+            <div class="cat-row"><div class="cat-row-name">🏺 Planters</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">1 product</span><button class="action-btn danger">Delete</button></div></div>
+            <div class="cat-row"><div class="cat-row-name">🌰 Plant Care</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">2 products</span><button class="action-btn danger">Delete</button></div></div>
+          </div>
+          <div class="add-cat-row">
+            <input class="form-group input" type="text" id="new-cat-input" placeholder="New category name..." style="padding:9px 14px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:14px;flex:1;background:white;outline:none">
+            <button class="btn btn-primary btn-sm" onclick="addCategory()">Add Category</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">🌿</div>
+          <span class="footer-logo-name">Sridevi Nursery & Landscaping</span>
+        </div>
+        <p>Hyderabad's trusted plant destination. Locally grown plants, expert care advice, and doorstep delivery across Hyderabad since 2010.</p>
+        <div class="footer-socials">
+          <a class="social-btn" href="#" aria-label="Instagram">📸</a>
+          <a class="social-btn" href="#" aria-label="Facebook">📘</a>
+          <a class="social-btn" href="https://wa.me/919876543210" aria-label="WhatsApp">💬</a>
+          <a class="social-btn" href="#" aria-label="YouTube">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a onclick="showPage('shop')">Indoor Plants</a>
+        <a onclick="showPage('shop')">Outdoor Plants</a>
+        <a onclick="showPage('shop')">Balcony Plants</a>
+        <a onclick="showPage('shop')">Lucky Plants</a>
+        <a onclick="showPage('shop')">Planters</a>
+        <a onclick="showPage('shop')">Plant Care</a>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a onclick="showPage('services')">Landscaping</a>
+        <a onclick="showPage('gifting')">Corporate Gifting</a>
+        <a onclick="showPage('gifting')">Event Gifting</a>
+        <a onclick="showPage('services')">Vertical Gardens</a>
+        <a onclick="showPage('services')">Balcony Setup</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a onclick="showPage('about')">About Us</a>
+        <a onclick="showPage('about')">Contact Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Shipping Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Sridevi Nursery & Landscaping. All rights reserved.</span>
+      <span>Banjara Hills Road No.12, Hyderabad · +91 98765 43210</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a class="whatsapp-btn" href="https://wa.me/919876543210" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+
+<!-- ===== 11-js.html ===== -->
+<script>
+/* ═══════════════════════════════════════════════
+   APP STATE
+═══════════════════════════════════════════════ */
+const PRODUCTS = [
+  { id:1,  name:'Peace Lily',       cat:'Indoor',      price:350, original:null, stock:0,  isBest:true,  isNew:false, emoji:'🪷', tags:['Low light','Once/week'] },
+  { id:2,  name:'Lucky Bamboo',     cat:'Lucky Plants',price:199, original:249,  stock:24, isBest:true,  isNew:false, emoji:'🎋', tags:['Bright indirect','Water daily'] },
+  { id:3,  name:'Snake Plant',      cat:'Indoor',      price:450, original:null, stock:18, isBest:true,  isNew:false, emoji:'🌿', tags:['Low light','Once/2 weeks'] },
+  { id:4,  name:'Aglaonema',        cat:'Indoor',      price:380, original:450,  stock:15, isBest:false, isNew:true,  emoji:'🍃', tags:['Shade ok','Once/week'] },
+  { id:5,  name:'Areca Palm',       cat:'Indoor',      price:899, original:null, stock:7,  isBest:true,  isNew:false, emoji:'🌴', tags:['Bright light','3×/week'] },
+  { id:6,  name:'Mini Palm',        cat:'Balcony',     price:320, original:null, stock:12, isBest:false, isNew:true,  emoji:'🌱', tags:['Full sun','2×/week'] },
+  { id:7,  name:'Lemongrass',       cat:'Balcony',     price:120, original:null, stock:30, isBest:false, isNew:true,  emoji:'🌾', tags:['Full sun','Daily'] },
+  { id:8,  name:'Jade Plant',       cat:'Lucky Plants',price:280, original:320,  stock:20, isBest:false, isNew:false, emoji:'💚', tags:['Bright light','2×/week'] },
+  { id:9,  name:'Kadalka',          cat:'Outdoor',     price:150, original:null, stock:25, isBest:false, isNew:true,  emoji:'🌺', tags:['Full sun','Daily'] },
+  { id:10, name:'Ceramic Blue Pot', cat:'Planters',    price:650, original:null, stock:12, isBest:false, isNew:false, emoji:'🏺', tags:['Ceramic','Medium size'] },
+  { id:11, name:'Potting Mix 2kg',  cat:'Plant Care',  price:180, original:null, stock:50, isBest:false, isNew:false, emoji:'🌰', tags:['2kg bag','All plants'] },
+  { id:12, name:'NPK Fertilizer',   cat:'Plant Care',  price:220, original:280,  stock:35, isBest:false, isNew:true,  emoji:'🧪', tags:['All purpose','Monthly'] },
+];
+
+const MOCK_USERS = [
+  { username:'admin',    password:'admin123', name:'Admin',    role:'ADMIN' },
+  { username:'customer', password:'cust123',  name:'Priya',    role:'CUSTOMER' },
+];
+
+const MOCK_ORDERS = [
+  { id:'SNL-2026-00005', customer:'Arun K.',  date:'14 Apr 2026', items:[{p:PRODUCTS[4],qty:1},{p:PRODUCTS[2],qty:1}],   total:2340, status:'Pending' },
+  { id:'SNL-2026-00004', customer:'Meena S.', date:'13 Apr 2026', items:[{p:PRODUCTS[1],qty:2},{p:PRODUCTS[7],qty:1}],   total:3150, status:'Processing' },
+  { id:'SNL-2026-00003', customer:'Priya R.', date:'12 Apr 2026', items:[{p:PRODUCTS[2],qty:1},{p:PRODUCTS[4],qty:1}],   total:1999, status:'Processing' },
+  { id:'SNL-2026-00002', customer:'Rajesh M.',date:'8 Apr 2026',  items:[{p:PRODUCTS[0],qty:2},{p:PRODUCTS[10],qty:2}],  total:4200, status:'Delivered' },
+  { id:'SNL-2026-00001', customer:'Priya R.', date:'3 Apr 2026',  items:[{p:PRODUCTS[1],qty:3},{p:PRODUCTS[10],qty:2}],  total:1557, status:'Delivered' },
+];
+
+let cart = [];
+let currentUser = null;
+let currentPage = 'home';
+let shopFilter = 'All';
+let shopSort = 'featured';
+let modalProductId = null;
+let modalQty = 1;
+let orderCounter = 5;
+
+/* ═══════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  loadCart();
+  renderCarousels();
+  renderShopGrid();
+  renderAdminProducts();
+  renderAdminOrders();
+  initCarouselDrag('best-sellers-track');
+  initCarouselDrag('new-arrivals-track');
+});
+
+/* ═══════════════════════════════════════════════
+   PAGE ROUTING
+═══════════════════════════════════════════════ */
+function showPage(id) {
+  // Guard: admin requires login
+  if (id === 'admin') {
+    if (!currentUser || currentUser.role !== 'ADMIN') { showPage('login'); return; }
+  }
+  // Guard: orders requires login
+  if (id === 'orders') {
+    if (!currentUser) { showPage('login'); return; }
+  }
+
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + id);
+  if (target) {
+    target.classList.add('active');
+    currentPage = id;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Update nav active state
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  const activeLink = document.querySelector(`.nav-link[onclick*="'${id}'"]`);
+  if (activeLink) activeLink.classList.add('active');
+
+  // Populate checkout on navigate
+  if (id === 'checkout') renderCheckoutSummary();
+}
+
+/* ═══════════════════════════════════════════════
+   CART
+═══════════════════════════════════════════════ */
+function addToCart(productId, qty = 1) {
+  const p = PRODUCTS.find(x => x.id === productId);
+  if (!p || p.stock === 0) return;
+  const existing = cart.find(x => x.id === productId);
+  if (existing) {
+    existing.qty = Math.min(existing.qty + qty, p.stock);
+  } else {
+    cart.push({ id: productId, qty });
+  }
+  saveCart();
+  renderCartSidebar();
+  showToast(p);
+}
+
+function removeFromCart(productId) {
+  cart = cart.filter(x => x.id !== productId);
+  saveCart();
+  renderCartSidebar();
+}
+
+function updateQty(productId, delta) {
+  const item = cart.find(x => x.id === productId);
+  if (!item) return;
+  item.qty = Math.max(1, item.qty + delta);
+  const p = PRODUCTS.find(x => x.id === productId);
+  if (p) item.qty = Math.min(item.qty, p.stock);
+  saveCart();
+  renderCartSidebar();
+}
+
+function getCartTotal() {
+  return cart.reduce((sum, item) => {
+    const p = PRODUCTS.find(x => x.id === item.id);
+    return p ? sum + (p.price * item.qty) : sum;
+  }, 0);
+}
+
+function getDelivery(total) { return total >= 500 ? 0 : 50; }
+
+function renderCartSidebar() {
+  const itemsEl = document.getElementById('cart-items');
+  const footerEl = document.getElementById('cart-footer');
+  const badgeEl = document.getElementById('cart-badge');
+  const countLabel = document.getElementById('cart-count-label');
+  const total = getCartTotal();
+  const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+
+  // Badge
+  if (totalQty > 0) {
+    badgeEl.textContent = totalQty;
+    badgeEl.classList.add('show');
+  } else {
+    badgeEl.classList.remove('show');
+  }
+  countLabel.textContent = totalQty > 0 ? `${totalQty} item${totalQty>1?'s':''}` : '';
+
+  if (cart.length === 0) {
+    itemsEl.innerHTML = `<div class="cart-empty"><div class="e-icon">🌱</div><p>Your cart is empty</p><button class="btn btn-outline btn-sm" onclick="toggleCart();showPage('shop')">Browse Plants</button></div>`;
+    footerEl.style.display = 'none';
+    document.getElementById('cart-progress-wrap').style.display = 'none';
+    return;
+  }
+
+  // Items
+  itemsEl.innerHTML = cart.map(item => {
+    const p = PRODUCTS.find(x => x.id === item.id);
+    if (!p) return '';
+    return `<div class="cart-item">
+      <div class="cart-item-emoji">${p.emoji}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${p.name}</div>
+        <div class="cart-item-cat">${p.cat}</div>
+        <div class="cart-item-row">
+          <div class="qty-stepper">
+            <button class="qty-btn" onclick="updateQty(${p.id},-1)">−</button>
+            <span class="qty-val">${item.qty}</span>
+            <button class="qty-btn" onclick="updateQty(${p.id},1)">+</button>
+          </div>
+          <span class="cart-item-price">₹${(p.price * item.qty).toLocaleString('en-IN')}</span>
+        </div>
+      </div>
+      <button class="cart-remove" onclick="removeFromCart(${p.id})" aria-label="Remove">✕</button>
+    </div>`;
+  }).join('');
+
+  // Progress bar toward ₹1,999 min order
+  const MIN_ORDER = 1999;
+  const pct = Math.min((total / MIN_ORDER) * 100, 100);
+  document.getElementById('cart-progress-wrap').style.display = 'block';
+  document.getElementById('cart-progress-fill').style.width = pct + '%';
+  const need = Math.max(MIN_ORDER - total, 0);
+  const labelEl = document.getElementById('cart-progress-label');
+  if (total >= MIN_ORDER) {
+    labelEl.innerHTML = `✓ Min. order met! <span>Free delivery applied</span>`;
+  } else {
+    labelEl.innerHTML = `Add <span>₹${need.toLocaleString('en-IN')}</span> more to place order`;
+  }
+
+  // Summary
+  const delivery = getDelivery(total);
+  document.getElementById('cart-subtotal').textContent = '₹' + total.toLocaleString('en-IN');
+  document.getElementById('cart-delivery').textContent = delivery === 0 ? 'Free' : '₹' + delivery;
+  document.getElementById('cart-total').textContent = '₹' + (total + delivery).toLocaleString('en-IN');
+
+  // Min order warn + button state
+  const minWarn = document.getElementById('cart-min-warn');
+  const checkoutBtn = document.getElementById('cart-checkout-btn');
+  if (total < MIN_ORDER) {
+    minWarn.classList.add('show');
+    checkoutBtn.disabled = true;
+    checkoutBtn.textContent = `Add ₹${(MIN_ORDER - total).toLocaleString('en-IN')} more`;
+  } else {
+    minWarn.classList.remove('show');
+    checkoutBtn.disabled = false;
+    checkoutBtn.textContent = 'Proceed to Checkout →';
+  }
+
+  footerEl.style.display = 'block';
+}
+
+function toggleCart() {
+  const overlay = document.getElementById('cart-overlay');
+  const sidebar = document.getElementById('cart-sidebar');
+  overlay.classList.toggle('open');
+  sidebar.classList.toggle('open');
+  if (sidebar.classList.contains('open')) renderCartSidebar();
+}
+
+function goToCheckout() {
+  if (!currentUser) { toggleCart(); showPage('login'); return; }
+  toggleCart();
+  showPage('checkout');
+}
+
+function saveCart() {
+  localStorage.setItem('snl_cart', JSON.stringify(cart));
+}
+function loadCart() {
+  try {
+    const saved = localStorage.getItem('snl_cart');
+    if (saved) cart = JSON.parse(saved);
+  } catch(e) { cart = []; }
+  renderCartSidebar();
+}
+
+/* ═══════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════ */
+function showToast(product) {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `
+    <div class="toast-emoji">${product.emoji}</div>
+    <div class="toast-body">
+      <div class="toast-title">${product.name} added to cart ✓</div>
+      <div class="toast-sub">${product.cat} · ₹${product.price}</div>
+      <span class="toast-link" onclick="toggleCart()">View Cart →</span>
+    </div>
+    <button class="toast-close" onclick="removeToast(this.parentElement)">✕</button>`;
+  container.appendChild(toast);
+  setTimeout(() => removeToast(toast), 3500);
+}
+function removeToast(el) {
+  if (!el) return;
+  el.classList.add('out');
+  setTimeout(() => el.remove(), 280);
+}
+
+/* ═══════════════════════════════════════════════
+   PRODUCT CARDS (reusable renderer)
+═══════════════════════════════════════════════ */
+function buildProductCard(p) {
+  const outOfStock = p.stock === 0;
+  const badges = [
+    p.isBest ? `<span class="badge badge-best">Best Seller</span>` : '',
+    p.isNew  ? `<span class="badge badge-new">New</span>` : '',
+    outOfStock ? `<span class="badge badge-out">Out of Stock</span>` : '',
+  ].filter(Boolean).join('');
+  const tags = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+  return `
+    <div class="product-card ${outOfStock ? 'out-of-stock' : ''}">
+      <div class="product-img">
+        <div class="badges">${badges}</div>
+        ${p.emoji}
+      </div>
+      <div class="product-body">
+        <div class="product-cat">${p.cat}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-tags">${tags}</div>
+        <div class="product-price">
+          <span class="price">₹${p.price}</span>
+          ${p.original ? `<span class="original">₹${p.original}</span>` : ''}
+        </div>
+        <div class="product-actions">
+          <button class="btn btn-outline" onclick="openModal(${p.id})">Details</button>
+          <button class="btn btn-primary" onclick="addToCart(${p.id})" ${outOfStock ? 'disabled' : ''}>
+            ${outOfStock ? 'Out of Stock' : '+ Cart'}
+          </button>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════════
+   CAROUSELS
+═══════════════════════════════════════════════ */
+function renderCarousels() {
+  const bestEl = document.getElementById('best-sellers-track');
+  const newEl = document.getElementById('new-arrivals-track');
+  if (bestEl) bestEl.innerHTML = PRODUCTS.filter(p => p.isBest).map(buildProductCard).join('');
+  if (newEl)  newEl.innerHTML  = PRODUCTS.filter(p => p.isNew).map(buildProductCard).join('');
+}
+
+function scrollCarousel(trackId, direction) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+  const cardWidth = track.querySelector('.product-card')?.offsetWidth || 240;
+  track.scrollBy({ left: direction * (cardWidth + 18), behavior: 'smooth' });
+}
+
+function initCarouselDrag(trackId) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+  let isDown = false, startX, scrollLeft;
+  track.addEventListener('mousedown', e => { isDown = true; track.classList.add('dragging'); startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
+  track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('dragging'); });
+  track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
+  track.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; track.scrollLeft = scrollLeft - (x - startX); });
+}
+
+/* ═══════════════════════════════════════════════
+   SHOP
+═══════════════════════════════════════════════ */
+function setShopFilter(cat, btn) {
+  shopFilter = cat;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderShopGrid();
+}
+
+function filterShop(cat) {
+  showPage('shop');
+  setTimeout(() => setShopFilter(cat, document.querySelector(`.filter-pill[onclick*="'${cat}'"]`)), 50);
+}
+
+function applyShopFilters() {
+  shopSort = document.getElementById('shop-sort')?.value || 'featured';
+  renderShopGrid();
+}
+
+function renderShopGrid() {
+  const grid = document.getElementById('shop-grid');
+  if (!grid) return;
+  let filtered = shopFilter === 'All' ? [...PRODUCTS] : PRODUCTS.filter(p => p.cat === shopFilter);
+
+  if (shopSort === 'price-asc')  filtered.sort((a,b) => a.price - b.price);
+  if (shopSort === 'price-desc') filtered.sort((a,b) => b.price - a.price);
+  if (shopSort === 'new')        filtered = filtered.filter(p => p.isNew).concat(filtered.filter(p => !p.isNew));
+
+  const countEl = document.getElementById('shop-count');
+  if (countEl) countEl.textContent = `Showing ${filtered.length} product${filtered.length !== 1 ? 's' : ''}`;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="no-results"><div class="icon">🔍</div><p>No products found in this category.</p><button class="btn btn-outline btn-sm" onclick="setShopFilter('All',document.querySelector('.filter-pill'))">Show All</button></div>`;
+    return;
+  }
+  grid.innerHTML = filtered.map(buildProductCard).join('');
+}
+
+/* ═══════════════════════════════════════════════
+   PRODUCT MODAL
+═══════════════════════════════════════════════ */
+function openModal(productId) {
+  const p = PRODUCTS.find(x => x.id === productId);
+  if (!p) return;
+  modalProductId = productId;
+  modalQty = 1;
+  document.getElementById('modal-img').textContent = p.emoji;
+  document.getElementById('modal-cat').textContent = p.cat.toUpperCase();
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-price').textContent = '₹' + p.price;
+  const orig = document.getElementById('modal-original');
+  orig.textContent = p.original ? '₹' + p.original : '';
+  document.getElementById('modal-tags').innerHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+  document.getElementById('modal-qty').textContent = 1;
+  document.getElementById('modal-stock').textContent = p.stock === 0 ? '⚠ Out of stock' : `${p.stock} in stock`;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal-overlay')) return;
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  modalProductId = null;
+}
+
+function modalQtyChange(delta) {
+  const p = PRODUCTS.find(x => x.id === modalProductId);
+  if (!p) return;
+  modalQty = Math.max(1, Math.min(modalQty + delta, p.stock || 1));
+  document.getElementById('modal-qty').textContent = modalQty;
+}
+
+function modalAddToCart() {
+  if (modalProductId) { addToCart(modalProductId, modalQty); document.getElementById('modal-overlay').classList.remove('open'); document.body.style.overflow = ''; }
+}
+
+function modalBuyNow() {
+  if (modalProductId) { addToCart(modalProductId, modalQty); document.getElementById('modal-overlay').classList.remove('open'); document.body.style.overflow = ''; goToCheckout(); }
+}
+
+/* ═══════════════════════════════════════════════
+   AUTH
+═══════════════════════════════════════════════ */
+function switchAuthTab(tab, btn) {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.getElementById('auth-' + tab + '-form').classList.add('active');
+}
+
+function doLogin() {
+  const u = document.getElementById('login-username').value.trim();
+  const p = document.getElementById('login-password').value;
+  const err = document.getElementById('login-error');
+  const found = MOCK_USERS.find(x => x.username === u && x.password === p);
+  if (!found) { err.classList.add('show'); return; }
+  err.classList.remove('show');
+  loginUser(found);
+}
+
+function doRegister() {
+  const name = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const pass = document.getElementById('reg-password').value;
+  const confirm = document.getElementById('reg-confirm').value;
+  const err = document.getElementById('register-error');
+  if (!name || !email || !pass) { err.textContent = 'Please fill all required fields.'; err.classList.add('show'); return; }
+  if (pass.length < 6) { err.textContent = 'Password must be at least 6 characters.'; err.classList.add('show'); return; }
+  if (pass !== confirm) { err.textContent = 'Passwords do not match.'; err.classList.add('show'); return; }
+  err.classList.remove('show');
+  const newUser = { username: email, password: pass, name, role: 'CUSTOMER' };
+  MOCK_USERS.push(newUser);
+  loginUser(newUser);
+}
+
+function loginUser(user) {
+  currentUser = user;
+  const btn = document.getElementById('nav-user-btn');
+  btn.textContent = `Hi, ${user.name} ▾`;
+  btn.classList.add('logged-in');
+  if (user.role === 'ADMIN') {
+    document.getElementById('admin-nav-link').style.display = '';
+    document.getElementById('admin-nav-link-mobile').style.display = '';
+    document.getElementById('admin-sidebar-name').textContent = user.name;
+    showPage('admin');
+  } else {
+    showPage('home');
+  }
+}
+
+function handleUserBtnClick() {
+  if (currentUser) {
+    // logout dropdown — simple toggle for prototype
+    if (confirm(`Logged in as ${currentUser.name}. Log out?`)) logoutUser();
+  } else {
+    showPage('login');
+  }
+}
+
+function logoutUser() {
+  currentUser = null;
+  cart = [];
+  saveCart();
+  renderCartSidebar();
+  const btn = document.getElementById('nav-user-btn');
+  btn.textContent = 'Login';
+  btn.classList.remove('logged-in');
+  document.getElementById('admin-nav-link').style.display = 'none';
+  document.getElementById('admin-nav-link-mobile').style.display = 'none';
+  showPage('home');
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE NAV
+═══════════════════════════════════════════════ */
+function toggleMobileMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function closeMobileMenu() {
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+/* ═══════════════════════════════════════════════
+   INQUIRY FORMS
+═══════════════════════════════════════════════ */
+function submitInquiry(e, type) {
+  e.preventDefault();
+  const wrap = document.getElementById(type + '-form-wrap');
+  const success = document.getElementById(type + '-success');
+  if (wrap) wrap.style.display = 'none';
+  if (success) success.classList.add('show');
+}
+
+/* ═══════════════════════════════════════════════
+   CHECKOUT
+═══════════════════════════════════════════════ */
+function validatePincode(val) {
+  const feedback = document.getElementById('pincode-feedback');
+  if (!feedback) return;
+  const num = parseInt(val);
+  if (val.length < 6) { feedback.className = 'pincode-feedback'; return; }
+  if (num >= 500001 && num <= 500098) {
+    feedback.textContent = '✓ Delivering to Hyderabad';
+    feedback.className = 'pincode-feedback ok';
+  } else {
+    feedback.textContent = '✗ Outside delivery zone. Call us: +91 98765 43210';
+    feedback.className = 'pincode-feedback err';
+  }
+}
+
+function renderCheckoutSummary() {
+  const itemsEl = document.getElementById('checkout-items');
+  if (!itemsEl) return;
+  itemsEl.innerHTML = cart.map(item => {
+    const p = PRODUCTS.find(x => x.id === item.id);
+    if (!p) return '';
+    return `<div class="summary-item">
+      <div class="summary-item-emoji">${p.emoji}</div>
+      <div class="summary-item-info">
+        <div class="summary-item-name">${p.name}</div>
+        <div class="summary-item-qty">× ${item.qty}</div>
+      </div>
+      <div class="summary-item-price">₹${(p.price * item.qty).toLocaleString('en-IN')}</div>
+    </div>`;
+  }).join('');
+
+  const total = getCartTotal();
+  const delivery = getDelivery(total);
+  document.getElementById('co-subtotal').textContent = '₹' + total.toLocaleString('en-IN');
+  document.getElementById('co-delivery').textContent = delivery === 0 ? 'Free' : '₹' + delivery;
+  document.getElementById('co-total').textContent = '₹' + (total + delivery).toLocaleString('en-IN');
+
+  const minWarn = document.getElementById('checkout-min-warn');
+  const placeBtn = document.getElementById('place-order-btn');
+  if (total < 1999) {
+    minWarn.classList.add('show');
+    placeBtn.disabled = true;
+  } else {
+    minWarn.classList.remove('show');
+    placeBtn.disabled = false;
+  }
+}
+
+function placeOrder() {
+  const name = document.getElementById('co-name')?.value.trim();
+  const phone = document.getElementById('co-phone')?.value.trim();
+  const address = document.getElementById('co-address')?.value.trim();
+  const area = document.getElementById('co-area')?.value;
+  const pincode = document.getElementById('co-pincode')?.value.trim();
+  if (!name || !phone || !address || !area || !pincode) { alert('Please fill all required delivery details.'); return; }
+  const pin = parseInt(pincode);
+  if (pin < 500001 || pin > 500098) { alert('Please enter a valid Hyderabad pincode (500001–500098).'); return; }
+
+  orderCounter++;
+  const orderNum = `SNL-2026-${String(orderCounter).padStart(5,'0')}`;
+  document.getElementById('success-order-num').textContent = orderNum;
+  cart = [];
+  saveCart();
+  renderCartSidebar();
+  showPage('success');
+}
+
+/* ═══════════════════════════════════════════════
+   ADMIN
+═══════════════════════════════════════════════ */
+function switchAdminTab(tab, btn) {
+  document.querySelectorAll('.admin-tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.admin-nav-item').forEach(i => i.classList.remove('active'));
+  document.getElementById('admin-tab-' + tab)?.classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function renderAdminProducts() {
+  const tbody = document.getElementById('admin-products-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = PRODUCTS.map(p => `
+    <tr>
+      <td><span style="font-size:20px">${p.emoji}</span> <strong>${p.name}</strong></td>
+      <td>${p.cat}</td>
+      <td>₹${p.price}${p.original ? `<br><span style="font-size:11px;color:var(--muted);text-decoration:line-through">₹${p.original}</span>` : ''}</td>
+      <td><span style="font-weight:700;color:${p.stock===0?'var(--error)':'var(--text)'}">${p.stock}</span></td>
+      <td>
+        ${p.isBest ? '<span class="badge badge-best" style="margin-right:4px">Best</span>' : ''}
+        ${p.isNew  ? '<span class="badge badge-new">New</span>' : ''}
+      </td>
+      <td>
+        <button class="action-btn" onclick="editProduct(${p.id})">Edit</button>
+        <button class="action-btn danger" onclick="deleteProduct(${p.id})">Delete</button>
+      </td>
+    </tr>`).join('');
+}
+
+function filterAdminProducts(query) {
+  const rows = document.querySelectorAll('#admin-products-tbody tr');
+  rows.forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(query.toLowerCase()) ? '' : 'none';
+  });
+}
+
+function toggleAddProductForm() {
+  const form = document.getElementById('add-product-form');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+
+function addProductFromAdmin() {
+  const name = document.getElementById('new-prod-name')?.value.trim();
+  const cat  = document.getElementById('new-prod-cat')?.value;
+  const price = parseInt(document.getElementById('new-prod-price')?.value);
+  const stock = parseInt(document.getElementById('new-prod-stock')?.value);
+  const emoji = document.getElementById('new-prod-emoji')?.value || '🌿';
+  const isBest = document.getElementById('new-prod-best')?.checked;
+  const isNew  = document.getElementById('new-prod-new')?.checked;
+  if (!name || !price) { alert('Name and price are required.'); return; }
+  const newProd = { id: PRODUCTS.length + 1, name, cat, price, original: null, stock: stock || 0, isBest, isNew, emoji, tags: [] };
+  PRODUCTS.push(newProd);
+  renderAdminProducts();
+  renderShopGrid();
+  renderCarousels();
+  toggleAddProductForm();
+}
+
+function deleteProduct(id) {
+  if (!confirm('Delete this product?')) return;
+  const idx = PRODUCTS.findIndex(p => p.id === id);
+  if (idx !== -1) PRODUCTS.splice(idx, 1);
+  renderAdminProducts();
+  renderShopGrid();
+  renderCarousels();
+}
+
+function editProduct(id) {
+  alert('Edit functionality — coming in full build. Product ID: ' + id);
+}
+
+function renderAdminOrders(filter = 'All') {
+  const tbody = document.getElementById('admin-orders-tbody');
+  if (!tbody) return;
+  const orders = filter === 'All' ? MOCK_ORDERS : MOCK_ORDERS.filter(o => o.status === filter);
+  tbody.innerHTML = orders.map(o => {
+    const badgeClass = { Pending:'badge-pending', Processing:'badge-processing', Delivered:'badge-delivered', Cancelled:'badge-cancelled' }[o.status] || 'badge-pending';
+    return `<tr>
+      <td><strong>${o.id}</strong></td>
+      <td>${o.customer}</td>
+      <td style="color:var(--muted);font-size:13px">${o.date}</td>
+      <td><strong>₹${o.total.toLocaleString('en-IN')}</strong></td>
+      <td><span class="badge ${badgeClass}">${o.status}</span></td>
+      <td>
+        <select class="status-select" onchange="updateOrderStatus('${o.id}',this.value)">
+          <option ${o.status==='Pending'?'selected':''}>Pending</option>
+          <option ${o.status==='Processing'?'selected':''}>Processing</option>
+          <option ${o.status==='Delivered'?'selected':''}>Delivered</option>
+          <option ${o.status==='Cancelled'?'selected':''}>Cancelled</option>
+        </select>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function filterAdminOrders(status, btn) {
+  document.querySelectorAll('.status-filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderAdminOrders(status);
+}
+
+function updateOrderStatus(orderId, newStatus) {
+  const order = MOCK_ORDERS.find(o => o.id === orderId);
+  if (order) order.status = newStatus;
+}
+
+function addCategory() {
+  const input = document.getElementById('new-cat-input');
+  const name = input?.value.trim();
+  if (!name) return;
+  const list = document.getElementById('admin-cat-list');
+  const row = document.createElement('div');
+  row.className = 'cat-row';
+  row.innerHTML = `<div class="cat-row-name">🌿 ${name}</div><div style="display:flex;align-items:center;gap:10px"><span class="cat-row-count">0 products</span><button class="action-btn danger" onclick="this.closest('.cat-row').remove()">Delete</button></div>`;
+  list.appendChild(row);
+  input.value = '';
+}
+</script>
+
+</body>
+</html>

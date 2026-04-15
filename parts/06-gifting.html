@@ -1,0 +1,182 @@
+<style>
+  .gift-hero {
+    background: linear-gradient(135deg, #3a1808 0%, var(--brown) 100%);
+    color: white;
+    padding: 64px 0;
+    text-align: center;
+  }
+  .gift-hero .section-label { color: #F6C89A; }
+  .gift-hero h1 { color: white; margin-bottom: 14px; }
+  .gift-hero p { opacity: 0.82; font-size: 16px; max-width: 500px; margin: 0 auto; }
+
+  .gifting-types { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 0; }
+  .gifting-type-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 40px 32px;
+    text-align: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .gifting-type-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+  .gifting-type-card .gift-icon { font-size: 52px; margin-bottom: 16px; }
+  .gifting-type-card h3 { font-size: 22px; margin-bottom: 10px; }
+  .gifting-type-card > p { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
+  .gift-features { list-style: none; text-align: left; margin-bottom: 24px; }
+  .gift-features li { font-size: 13.5px; color: var(--text-2); padding: 4px 0; }
+  .gift-features li::before { content: '🌿 '; }
+
+  .gift-showcase { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .gift-showcase-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 22px 16px;
+    text-align: center;
+    transition: box-shadow 0.2s;
+  }
+  .gift-showcase-card:hover { box-shadow: var(--shadow-hover); }
+  .gift-showcase-card .icon { font-size: 38px; margin-bottom: 10px; }
+  .gift-showcase-card h5 { font-size: 13.5px; font-weight: 700; margin-bottom: 5px; font-family: 'Inter', sans-serif; }
+  .gift-showcase-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  @media (max-width: 700px) {
+    .gifting-types { grid-template-columns: 1fr; }
+    .gift-showcase { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<!-- GIFTING PAGE -->
+<div class="page" id="page-gifting">
+
+  <div class="gift-hero">
+    <div class="container">
+      <div class="section-label">PLANT GIFTING</div>
+      <h1>Corporate &amp; Event<br>Plant Gifting</h1>
+      <p>Thoughtful, green gifts that leave a lasting impression — for every occasion and every scale.</p>
+    </div>
+  </div>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px">
+        <div class="section-label">GIFTING TYPES</div>
+        <h2 class="section-title">Choose your occasion</h2>
+      </div>
+      <div class="gifting-types">
+        <div class="gifting-type-card">
+          <div class="gift-icon">🏢</div>
+          <h3>Corporate Gifting</h3>
+          <p>Strengthen business relationships with beautiful, branded plant gifts for clients, employees, and events.</p>
+          <ul class="gift-features">
+            <li>Bulk orders (minimum 10 units)</li>
+            <li>Custom branded packaging</li>
+            <li>GST invoice available</li>
+            <li>Desk plants &amp; premium arrangements</li>
+            <li>Pan-Hyderabad delivery</li>
+          </ul>
+          <button class="btn btn-primary btn-sm" onclick="document.getElementById('gift-form-wrap').scrollIntoView({behavior:'smooth'})">Get Bulk Quote →</button>
+        </div>
+        <div class="gifting-type-card">
+          <div class="gift-icon">🌸</div>
+          <h3>Functions &amp; Events</h3>
+          <p>Make weddings, housewarmings, pooja ceremonies, and celebrations memorable with our plant gift collections.</p>
+          <ul class="gift-features">
+            <li>Wedding favours &amp; return gifts</li>
+            <li>Housewarming gift sets</li>
+            <li>Festive &amp; pooja hampers</li>
+            <li>Gift wrapping included</li>
+            <li>Same-day dispatch available</li>
+          </ul>
+          <button class="btn btn-outline btn-sm" onclick="document.getElementById('gift-form-wrap').scrollIntoView({behavior:'smooth'})">Plan Your Order →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:36px">
+        <div class="section-label">GIFT IDEAS</div>
+        <h2 class="section-title">Popular choices</h2>
+      </div>
+      <div class="gift-showcase">
+        <div class="gift-showcase-card">
+          <div class="icon">🌿</div>
+          <h5>Office Desk Plants</h5>
+          <p>Low-maintenance plants perfect for desks and workspaces.</p>
+        </div>
+        <div class="gift-showcase-card">
+          <div class="icon">💒</div>
+          <h5>Wedding Favours</h5>
+          <p>Miniature potted plants with personalised tags for guests.</p>
+        </div>
+        <div class="gift-showcase-card">
+          <div class="icon">🏠</div>
+          <h5>Housewarming Sets</h5>
+          <p>Curated sets with lucky plants, planters, and care kits.</p>
+        </div>
+        <div class="gift-showcase-card">
+          <div class="icon">🎑</div>
+          <h5>Festive Hampers</h5>
+          <p>Diwali, Ugadi, and seasonal plant hampers with artisanal packaging.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div style="max-width:600px;margin:0 auto">
+        <div style="text-align:center;margin-bottom:32px">
+          <div class="section-label">ENQUIRE NOW</div>
+          <h2 class="section-title">Tell us about your order</h2>
+          <p class="section-sub" style="margin:0 auto">We'll get back to you within a few hours with availability and pricing.</p>
+        </div>
+        <div id="gift-form-wrap">
+          <form onsubmit="submitInquiry(event,'gift')">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Your Name *</label>
+                <input type="text" placeholder="e.g. Priya Sharma" required>
+              </div>
+              <div class="form-group">
+                <label>Phone Number *</label>
+                <input type="tel" placeholder="+91 98765 43210" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Occasion Type *</label>
+                <select required>
+                  <option value="">Select occasion</option>
+                  <option>Corporate / Office</option>
+                  <option>Wedding</option>
+                  <option>Housewarming</option>
+                  <option>Festival / Pooja</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Expected Quantity</label>
+                <input type="number" placeholder="e.g. 25 units" min="1">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Additional Details</label>
+              <textarea placeholder="Budget per unit, preferred plants, delivery date, special packaging requests..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-brown btn-full btn-lg">Send Inquiry →</button>
+          </form>
+        </div>
+        <div class="form-success" id="gift-success">
+          <div class="success-icon">🎁</div>
+          <h4>Inquiry Received!</h4>
+          <p>Lovely! We'll review your gifting requirements and reach out within a few hours with options and pricing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

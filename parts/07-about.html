@@ -1,0 +1,133 @@
+<style>
+  .about-hero {
+    background: var(--surface);
+    border-bottom: 1.5px solid var(--border);
+    padding: 64px 0 48px;
+    text-align: center;
+  }
+  .about-hero h1 { margin-bottom: 14px; }
+  .about-hero p { font-size: 17px; color: var(--text-2); max-width: 540px; margin: 0 auto; line-height: 1.7; }
+
+  .about-story-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 60px; align-items: start; }
+  .about-story p { font-size: 15.5px; color: var(--text-2); line-height: 1.8; margin-bottom: 18px; }
+  .about-pillars { display: flex; flex-direction: column; gap: 16px; }
+  .about-pillar {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px 22px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: box-shadow 0.2s;
+  }
+  .about-pillar:hover { box-shadow: var(--shadow-hover); }
+  .pillar-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+  .pillar-text h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; font-family: 'Inter', sans-serif; }
+  .pillar-text p { font-size: 13px; color: var(--muted); line-height: 1.55; margin: 0; }
+
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .contact-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 28px 24px;
+    text-align: center;
+    transition: box-shadow 0.2s;
+  }
+  .contact-card:hover { box-shadow: var(--shadow-hover); }
+  .contact-card .c-icon { font-size: 36px; margin-bottom: 12px; }
+  .contact-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; font-family: 'Inter', sans-serif; }
+  .contact-card p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+  .contact-card a { color: var(--green-900); font-weight: 600; }
+
+  @media (max-width: 768px) {
+    .about-story-grid { grid-template-columns: 1fr; gap: 36px; }
+    .contact-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  }
+</style>
+
+<!-- ABOUT PAGE -->
+<div class="page" id="page-about">
+
+  <div class="about-hero">
+    <div class="container">
+      <div class="section-label">OUR STORY</div>
+      <h1>Hyderabad's trusted<br><em class="serif" style="color:var(--green-400)">plant destination</em></h1>
+      <p>Family-run, locally grown, community-loved — we've been making Hyderabad greener since 2010.</p>
+    </div>
+  </div>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="about-story-grid">
+        <div class="about-story">
+          <div class="section-label">WHO WE ARE</div>
+          <h2 class="section-title" style="margin-bottom:24px">15 years of growing green in Hyderabad</h2>
+          <p>Sridevi Nursery began as a small corner garden store in Banjara Hills in 2010. What started with a handful of indoor plants and a lot of love for gardening has grown into Hyderabad's most trusted nursery for home gardeners, landscape architects, and corporate clients alike.</p>
+          <p>Every plant we sell is nurtured at our own nursery — no middlemen, no cold storage. We believe healthy plants come from healthy roots, and that starts with how we grow them right here in Hyderabad's climate.</p>
+          <p>Today, we serve 500+ happy customers across Hyderabad, offering 100+ plant varieties, professional landscaping services, and plant gifting solutions for every occasion.</p>
+        </div>
+        <div class="about-pillars">
+          <div class="about-pillar">
+            <div class="pillar-icon">🌱</div>
+            <div class="pillar-text">
+              <h4>Locally Grown</h4>
+              <p>Every plant is grown at our Banjara Hills nursery, adapted to Hyderabad's heat and humidity.</p>
+            </div>
+          </div>
+          <div class="about-pillar">
+            <div class="pillar-icon">🧑‍🌾</div>
+            <div class="pillar-text">
+              <h4>Expert Care Advice</h4>
+              <p>15+ years of horticultural experience. Our team guides every customer to the right plant.</p>
+            </div>
+          </div>
+          <div class="about-pillar">
+            <div class="pillar-icon">🚚</div>
+            <div class="pillar-text">
+              <h4>Doorstep Delivery</h4>
+              <p>Same-day dispatch across all Hyderabad areas for orders placed before noon.</p>
+            </div>
+          </div>
+          <div class="about-pillar">
+            <div class="pillar-icon">🤝</div>
+            <div class="pillar-text">
+              <h4>Community First</h4>
+              <p>We work with local communities, schools, and housing societies to build greener neighbourhoods.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px">
+        <div class="section-label">FIND US</div>
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-sub" style="margin:0 auto">We're open 6 days a week. Drop by or give us a call.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="c-icon">📍</div>
+          <h4>Our Nursery</h4>
+          <p>Banjara Hills Road No.12<br>Hyderabad, Telangana — 500034</p>
+        </div>
+        <div class="contact-card">
+          <div class="c-icon">📞</div>
+          <h4>Call / WhatsApp</h4>
+          <p><a href="tel:+919876543210">+91 98765 43210</a><br>Mon–Sat: 8 AM – 7 PM<br>Sun: 9 AM – 5 PM</p>
+        </div>
+        <div class="contact-card">
+          <div class="c-icon">💬</div>
+          <h4>WhatsApp Us</h4>
+          <p>Quick questions, order updates, or just say hello on WhatsApp.</p>
+          <a href="https://wa.me/919876543210" target="_blank" class="btn btn-outline btn-sm" style="margin-top:12px;display:inline-flex">Chat on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

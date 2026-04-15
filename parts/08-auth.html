@@ -1,0 +1,210 @@
+<style>
+  /* ── AUTH ── */
+  .auth-page {
+    min-height: calc(100vh - var(--bar-h) - var(--nav-h) - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    background: var(--sand);
+  }
+  .auth-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px 36px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: var(--shadow-card);
+  }
+  .auth-logo { text-align: center; margin-bottom: 28px; }
+  .auth-logo .logo-icon { font-size: 36px; margin-bottom: 8px; }
+  .auth-logo h2 { font-size: 22px; margin-bottom: 4px; }
+  .auth-logo p { font-size: 13px; color: var(--muted); }
+
+  .auth-tabs { display: flex; background: var(--sand); border-radius: var(--radius); padding: 4px; margin-bottom: 28px; }
+  .auth-tab {
+    flex: 1;
+    padding: 9px;
+    border: none;
+    background: none;
+    border-radius: calc(var(--radius) - 2px);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .auth-tab.active { background: var(--surface); color: var(--green-900); box-shadow: var(--shadow-card); }
+
+  .auth-form { display: none; }
+  .auth-form.active { display: block; }
+
+  .auth-divider { text-align: center; font-size: 12px; color: var(--muted); margin: 16px 0; position: relative; }
+  .auth-divider::before, .auth-divider::after {
+    content: ''; position: absolute; top: 50%; width: 40%; height: 1px; background: var(--border);
+  }
+  .auth-divider::before { left: 0; }
+  .auth-divider::after { right: 0; }
+
+  .auth-hint {
+    background: var(--green-50);
+    border: 1.5px solid var(--green-100);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    font-size: 12px;
+    color: var(--text-2);
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+  .auth-hint strong { color: var(--green-900); }
+  .auth-error {
+    background: #FEE2E2;
+    border: 1.5px solid #FECACA;
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--error);
+    margin-bottom: 14px;
+    display: none;
+  }
+  .auth-error.show { display: block; }
+
+  /* ── MY ORDERS ── */
+  .orders-page { padding: 48px 0 80px; }
+  .orders-page-header { margin-bottom: 32px; }
+  .orders-page-header h2 { margin-bottom: 6px; }
+  .orders-page-header p { color: var(--muted); font-size: 14px; }
+  .orders-table-wrap {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .orders-table { width: 100%; border-collapse: collapse; }
+  .orders-table th {
+    text-align: left;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    padding: 14px 20px;
+    background: var(--sand);
+    border-bottom: 1.5px solid var(--border);
+  }
+  .orders-table td { padding: 16px 20px; font-size: 14px; border-bottom: 1.5px solid var(--border); }
+  .orders-table tr:last-child td { border-bottom: none; }
+  .orders-table tr:hover td { background: var(--sand); }
+  .order-num { font-weight: 700; color: var(--green-900); font-size: 13px; }
+  .order-items { font-size: 13px; color: var(--text-2); }
+  .order-total { font-weight: 700; }
+
+  @media (max-width: 600px) {
+    .auth-card { padding: 28px 20px; }
+    .orders-table th, .orders-table td { padding: 12px; font-size: 12px; }
+  }
+</style>
+
+<!-- LOGIN PAGE -->
+<div class="page" id="page-login">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="logo-icon">🌿</div>
+        <h2>Welcome back</h2>
+        <p>Sign in to your Sridevi Nursery account</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuthTab('login',this)">Login</button>
+        <button class="auth-tab" onclick="switchAuthTab('register',this)">Register</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div class="auth-form active" id="auth-login-form">
+        <div class="auth-error" id="login-error">Invalid username or password. Please try again.</div>
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="login-username" placeholder="Enter username" autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+        </div>
+        <button class="btn btn-primary btn-full" onclick="doLogin()" style="margin-top:4px">Sign In →</button>
+        <div class="auth-hint">
+          <strong>Demo accounts:</strong><br>
+          Admin → <strong>admin</strong> / <strong>admin123</strong><br>
+          Customer → <strong>customer</strong> / <strong>cust123</strong>
+        </div>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div class="auth-form" id="auth-register-form">
+        <div class="auth-error" id="register-error"></div>
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="reg-name" placeholder="e.g. Priya Sharma">
+        </div>
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" id="reg-email" placeholder="priya@example.com">
+        </div>
+        <div class="form-group">
+          <label>Password *</label>
+          <input type="password" id="reg-password" placeholder="Min. 6 characters">
+        </div>
+        <div class="form-group">
+          <label>Confirm Password *</label>
+          <input type="password" id="reg-confirm" placeholder="Repeat password">
+        </div>
+        <button class="btn btn-primary btn-full" onclick="doRegister()" style="margin-top:4px">Create Account →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MY ORDERS PAGE -->
+<div class="page" id="page-orders">
+  <div class="container">
+    <div class="orders-page">
+      <div class="orders-page-header">
+        <h2>My Orders</h2>
+        <p>Your order history with Sridevi Nursery</p>
+      </div>
+      <div class="orders-table-wrap">
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>Order #</th>
+              <th>Date</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="orders-tbody">
+            <tr>
+              <td><span class="order-num">SNL-2026-00003</span></td>
+              <td>12 Apr 2026</td>
+              <td class="order-items">Snake Plant × 1, Areca Palm × 1</td>
+              <td class="order-total">₹1,999</td>
+              <td><span class="badge badge-processing">Processing</span></td>
+            </tr>
+            <tr>
+              <td><span class="order-num">SNL-2026-00001</span></td>
+              <td>3 Apr 2026</td>
+              <td class="order-items">Lucky Bamboo × 3, Potting Mix × 2</td>
+              <td class="order-total">₹1,557</td>
+              <td><span class="badge badge-delivered">Delivered</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:28px;text-align:center">
+        <button class="btn btn-outline" onclick="showPage('shop')">← Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div>
